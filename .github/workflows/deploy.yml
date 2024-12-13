@@ -46,6 +46,15 @@ jobs:
             - name: Build
               run: hugo --minify --gc
 
+            - name: Check if Algolia secrets are set
+              run: |
+                if [ -z "${{ secrets.ALGOLIA_APP_ID }}" ] || [ -z "${{ secrets.ALGOLIA_API_KEY }}" ]; then
+                  echo "Algolia App ID or API Key is not set properly!"
+                  exit 1
+                else
+                  echo "Algolia secrets are set correctly."
+                fi
+
             - name: Update Algolia Search Index
               env:
                 ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
