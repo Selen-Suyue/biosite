@@ -47,7 +47,7 @@ jobs:
               run: hugo --minify --gc
 
             - name: Set Environment Variables
-              run: echo "ALGOLIA_INDEX_NAME=biosite
+              run: export ALGOLIA_INDEX_NAME=biosite
 
             - name: Update Algolia Search Index
               run: |
