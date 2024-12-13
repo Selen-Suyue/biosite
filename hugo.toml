@@ -19,3 +19,9 @@ notAlternative = true
 [markup.highlight]
 guessSyntax = true
 noClasses = false
+
+# enable math katex
+[markup.goldmark.extensions.passthrough]
+enable = true
+delimiters.block = [["\\[", "\\]"], ["$$", "$$"]]
+delimiters.inline = [["\\(", "\\)"], ["$", "$"]]
