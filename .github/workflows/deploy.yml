@@ -1,86 +1,86 @@
 name: Deploy to Github Pages
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        environment:
-            name: ALGOLIA
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: ALGOLIA
 
-        permissions:
-            # Give the default GITHUB_TOKEN write permission to commit and push the
-            # added or changed files to the repository.
-            contents: write
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
 
-        steps:
-            - name: Checkout Repository
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-                  submodules: true  # pull submodules theme/reimu
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true # pull submodules theme/reimu
 
-            - name: Cache Hugo resources
-              uses: actions/cache@v4
-              env:
-                  cache-name: cache-hugo-resources
-              with:
-                  path: |
-                    resources
-                    submodules  # add cache for theme/reimu
-                  key: ${{ env.cache-name }}
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-hugo-resources
+        with:
+          path: |
+            resources
+            submodules  # add cache for theme/reimu
+          key: ${{ env.cache-name }}
 
-            - uses: actions/setup-go@v5
-              with:
-                  go-version: "^1.17.0"
-            - run: go version
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "^1.17.0"
+      - run: go version
 
-            - name: Setup Hugo
-              uses: peaceiris/actions-hugo@v2
-              with:
-                  hugo-version: "latest"
-                  extended: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
 
-            - name: Build
-              run: hugo --minify --gc
+      - name: Build
+        run: hugo --minify --gc
 
-            - name: Check if Algolia secrets are set
-              run: |
-                if [ -z "${{ secrets.ALGOLIA_APP_ID }}" ] || [ -z "${{ secrets.ALGOLIA_API_KEY }}" ]; then
-                  echo "Algolia App ID or API Key is not set properly!"
-                  exit 1
-                else
-                  echo "Algolia secrets are set correctly."
-                fi
+      - name: Check if Algolia secrets are set
+        run: |
+          if [ -z "${{ secrets.ALGOLIA_APP_ID }}" ] || [ -z "${{ secrets.ALGOLIA_API_KEY }}" ]; then
+            echo "Algolia App ID or API Key is not set properly!"
+            exit 1
+          else
+            echo "Algolia secrets are set correctly."
+          fi
 
-            - name: Update Algolia Search Index
-              env:
-                ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-                ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-                ALGOLIA_INDEX_NAME: biosite
-              run: |
-                # Check if the `algolia.json` file exists in the public folder
-                if [ -f public/algolia.json ]; then
-                  echo "Found algolia.json, uploading to Algolia..."
-                  
-                  # Upload the algolia.json to Algolia using curl
-                  curl -X POST \
-                    -H "X-Algolia-API-Key: $ALGOLIA_API_KEY" \
-                    -H "X-Algolia-Application-Id: $ALGOLIA_APP_ID" \
-                    --data-binary @public/algolia.json \
-                    "https://$ALGOLIA_APP_ID-dsn.algolia.net/1/indexes/$ALGOLIA_INDEX_NAME/batch"  # Replace YOUR_INDEX_NAME with your actual Algolia index name
-                else
-                  echo "algolia.json not found, skipping Algolia update."
-                fi
+      - name: Update Algolia Search Index
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_INDEX_NAME: biosite
+        run: |
+          # Check if the `algolia.json` file exists in the public folder
+          if [ -f public/algolia.json ]; then
+            echo "Found algolia.json, uploading to Algolia..."
+            
+            # Upload the algolia.json to Algolia using curl
+            curl -X POST \
+              -H "X-Algolia-API-Key: $ALGOLIA_API_KEY" \
+              -H "X-Algolia-Application-Id: $ALGOLIA_APP_ID" \
+              --data-binary @public/algolia.json \
+              "https://$ALGOLIA_APP_ID-dsn.algolia.net/1/indexes/$ALGOLIA_INDEX_NAME/batch"  # Replace YOUR_INDEX_NAME with your actual Algolia index name
+          else
+            echo "algolia.json not found, skipping Algolia update."
+          fi
 
-            - name: Deploy 🚀
-              uses: JamesIves/github-pages-deploy-action@v4
-              with:
-                  branch: gh-pages
-                  folder: public
-                  clean: true
-                  single-commit: true
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: public
+          clean: true
+          single-commit: true
