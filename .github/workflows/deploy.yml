@@ -14,7 +14,6 @@ jobs:
             # Give the default GITHUB_TOKEN write permission to commit and push the
             # added or changed files to the repository.
             contents: write
-            secrets: read    # Permissions to access the Algolia credentials
 
         steps:
             - name: Checkout Repository
