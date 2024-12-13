@@ -16,16 +16,20 @@ jobs:
             contents: write
 
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout Repository
+              uses: actions/checkout@v4
               with:
                   fetch-depth: 0
+                  submodules: true  # pull submodules theme/reimu
 
             - name: Cache Hugo resources
               uses: actions/cache@v4
               env:
                   cache-name: cache-hugo-resources
               with:
-                  path: resources
+                  path: |
+                    resources
+                    submodules  # add cache for theme/reimu
                   key: ${{ env.cache-name }}
 
             - uses: actions/setup-go@v5
