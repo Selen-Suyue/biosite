@@ -46,10 +46,11 @@ jobs:
             - name: Build
               run: hugo --minify --gc
 
-            - name: Set Environment Variables
-              run: export ALGOLIA_INDEX_NAME=biosite
-
             - name: Update Algolia Search Index
+              env:
+                ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+                ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+                ALGOLIA_INDEX_NAME: biosite
               run: |
                 # Check if the `algolia.json` file exists in the public folder
                 if [ -f public/algolia.json ]; then
@@ -57,8 +58,8 @@ jobs:
                   
                   # Upload the algolia.json to Algolia using curl
                   curl -X POST \
-                    -H "X-Algolia-API-Key: ${{ secrets.ALGOLIA_API_KEY }}" \
-                    -H "X-Algolia-Application-Id: ${{ secrets.ALGOLIA_APP_ID }}" \
+                    -H "X-Algolia-API-Key: $ALGOLIA_API_KEY" \
+                    -H "X-Algolia-Application-Id: $ALGOLIA_APP_ID" \
                     --data-binary @public/algolia.json \
                     "https://$ALGOLIA_APP_ID-dsn.algolia.net/1/indexes/$ALGOLIA_INDEX_NAME/batch"  # Replace YOUR_INDEX_NAME with your actual Algolia index name
                 else
