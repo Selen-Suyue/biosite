@@ -9,6 +9,8 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        environment:
+            name: github-pages
 
         permissions:
             # Give the default GITHUB_TOKEN write permission to commit and push the
