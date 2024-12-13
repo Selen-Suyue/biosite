@@ -14,3 +14,8 @@ baseName = "algolia"
 isPlainText = true
 mediaType = "application/json"
 notAlternative = true
+
+# enable code highlight
+[markup.highlight]
+guessSyntax = true
+noClasses = false
