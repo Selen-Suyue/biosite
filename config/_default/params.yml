@@ -250,7 +250,7 @@ algolia_search:
   enable: true
   appID: WA044HB71V
   apiKey: caa29a9590340fe3ceddfac6e7027392
-  indexName: 
+  indexName: biosite
   hits:
     per_page: 10
   labels:
