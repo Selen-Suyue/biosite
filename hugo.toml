@@ -1,6 +1,6 @@
 baseURL = 'https://selen-suyue.github.io/biosite/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = "Selen's Blog"
 
 theme = 'reimu'
 
