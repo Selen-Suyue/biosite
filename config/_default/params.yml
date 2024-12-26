@@ -27,8 +27,8 @@ dateFormat: "2006-01-02"
 timeFormat: "2006-01-02 15:04:05"
 
 author: Selen
-description: "少女祈祷中..."
-subtitle: "少女祈祷中..."
+description: "さくら荘の雪"
+subtitle: "さくら荘の雪"
 
 banner: "images/banner.webp"
 # You can also write it in the form of the following url
@@ -264,7 +264,7 @@ algolia_search:
 
 preloader:
   enable: true
-  text: 少女祈祷中...
+  text: さくら荘の雪
   icon:  # default use inline svg for fast speed, you can use a image url, like '/images/taichi.png'
 
 # see https://github.com/D-Sketon/aos.js
