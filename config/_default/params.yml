@@ -45,7 +45,7 @@ banner_srcset:
     - src: "images/banner.webp"
       media: "(min-width: 800px)"
 
-avatar: "images/zhenbai.png"
+avatar: "zhenbai.png"
 
 # Open Graph
 open_graph:
