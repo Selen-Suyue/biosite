@@ -10,7 +10,7 @@ math: true
 mermaid: true
 
 categories:
-  - journal
+  -
 tags:
   -
   -
