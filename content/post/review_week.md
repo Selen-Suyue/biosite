@@ -1,6 +1,7 @@
 ---
 title: 'Review Week'
 cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/qingyin2.jpg
+categories: journal
 date: 2024-12-26
 lastmod: 2024-12-26
 ---
