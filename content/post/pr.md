@@ -1,8 +1,7 @@
 ---
 title: 'After PR'
 cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/guhechu.jpg
-category: 
-  - journal
+category: journal
 date: 2024-12-27
 lastmod: 2024-12-27
 ---
