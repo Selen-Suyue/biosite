@@ -1,7 +1,8 @@
 ---
 title: 'After PR'
 cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/guhechu.jpg
-categories: journal
+categor: journal
+tag: Final Exam
 date: 2024-12-27
 lastmod: 2024-12-27
 ---
