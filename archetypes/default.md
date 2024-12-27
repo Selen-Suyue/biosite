@@ -6,8 +6,8 @@ keywords: "{{replace .Name "-" ","}}"
 date: {{ .Date }}
 lastmod: {{ .Date }}
 
-math: false
-mermaid: false
+math: true
+mermaid: true
 
 categories:
   -
