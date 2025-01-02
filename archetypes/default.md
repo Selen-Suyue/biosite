@@ -11,6 +11,7 @@ mermaid: true
 
 categories:
   - journal
+  - essay
 tags:
   -
   -
