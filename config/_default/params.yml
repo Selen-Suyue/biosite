@@ -117,7 +117,7 @@ recent_posts_limits: 5
 
 anchor_icon: # default use '#' icon, you can use a hexadecimal representation of fontawesome or icon_font, like 'f0c1'
 
-reimu_cursor: true
+reimu_cursor: False
 
 icon_font: 4552607_tq6stt6tcg
 
