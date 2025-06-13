@@ -247,7 +247,7 @@ giscus:
 ########################################
 
 algolia_search:
-  enable: true
+  enable: false
   appID: WA044HB71V
   apiKey: caa29a9590340fe3ceddfac6e7027392
   indexName: biosite
