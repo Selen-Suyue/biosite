@@ -3,8 +3,8 @@ title: '写在蝉鸣时'
 cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/guhechu.jpg
 categor: journal
 tag: Final Exam
-date: 2025-6-14
-lastmod: 2025-6-14
+date: 2025-06-14
+lastmod: 2025-06-14
 ---
 
 这篇刚开始叫作：*"忙于昼夜奔白发"*，于是这几个字就一直孤零零从去年年底留到了现在，倒是很切题了。
