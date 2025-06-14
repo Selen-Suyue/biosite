@@ -249,7 +249,7 @@ giscus:
 algolia_search:
   enable: true
   appID: USLPVIANYM
-  apiKey: 8d6e3a27e85555460a2e715625f5d0c7
+  apiKey: 73500557a46048706467601cb06257f7
   indexName: biosite
   hits:
     per_page: 10
