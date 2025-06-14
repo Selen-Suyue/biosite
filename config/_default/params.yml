@@ -248,7 +248,7 @@ giscus:
 
 algolia_search:
   enable: true
-  appID: USLPVIANYM
+  appID: 12345678
   apiKey: 12345678
   indexName: biosite
   hits:
