@@ -234,7 +234,7 @@ giscus:
   repoId: R_kgDONdBdQg
   category: Announcements
   categoryId: DIC_kwDONdBdQs4ClMpV
-  mapping: pathname
+  mapping: url
   strict: 0
   reactionsEnabled: 1
   emitMetadata: 0
