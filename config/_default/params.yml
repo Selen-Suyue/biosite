@@ -247,9 +247,9 @@ giscus:
 ########################################
 
 algolia_search:
-  enable: false
-  appID: WA044HB71V
-  apiKey: caa29a9590340fe3ceddfac6e7027392
+  enable: true
+  appID: USLPVIANYM
+  apiKey: 73500557a46048706467601cb06257f7
   indexName: biosite
   hits:
     per_page: 10
