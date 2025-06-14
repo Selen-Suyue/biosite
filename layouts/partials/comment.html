@@ -1,0 +1,26 @@
+{{- /* Giscus Support */ -}}
+{{- if .Site.Params.giscus.enable -}}
+<div class="comment giscus-comment">
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ .Site.Params.giscus.repo }}"
+            data-repo-id="{{ .Site.Params.giscus.repoId }}"
+            data-category="{{ .Site.Params.giscus.category }}"
+            data-category-id="{{ .Site.Params.giscus.categoryId }}"
+            data-mapping="{{ .Site.Params.giscus.mapping }}"
+            data-strict="{{ .Site.Params.giscus.strict }}"
+            data-reactions-enabled="{{ .Site.Params.giscus.reactionsEnabled }}"
+            data-emit-metadata="{{ .Site.Params.giscus.emitMetadata }}"
+            data-input-position="{{ .Site.Params.giscus.inputPosition }}"
+            data-theme="{{ .Site.Params.giscus.theme }}"
+            data-lang="{{ .Site.Params.giscus.lang }}"
+            {{- with .Site.Params.giscus.loading }}
+            data-loading="{{ . }}"
+            {{- end }}
+            crossorigin="anonymous"
+            async>
+    </script>
+</div>
+{{- end -}}
+
+{{- /* 其他评论系统，比如 Disqus, Valine 等，可以保留原样 */ -}}
+{{- /* ... The rest of the original file's content for other comment systems ... */ -}}
