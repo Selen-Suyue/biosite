@@ -6,14 +6,9 @@ theme = 'reimu'
 
 
 [outputs]
-home = ["Algolia", "HTML", "RSS"]
+home = [ "HTML", "RSS"]
 
 # enable search algolia
-[outputFormats.Algolia]
-baseName = "algolia"
-isPlainText = true
-mediaType = "application/json"
-notAlternative = true
 
 # enable code highlight
 [markup.highlight]

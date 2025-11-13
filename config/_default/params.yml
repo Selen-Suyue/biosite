@@ -246,17 +246,17 @@ giscus:
 # Search
 ########################################
 
-algolia_search:
-  enable: true
-  appID: 12345678
-  apiKey: 12345678
-  indexName: biosite
-  hits:
-    per_page: 10
-  labels:
-    input_placeholder: "Search..."
-    hits_empty: "No results found for '${query}'"
-    hits_stats: "Found ${hits} results (in ${time} ms)"
+# algolia_search:
+#   enable: true
+#   appID: 12345678
+#   apiKey: 12345678
+#   indexName: biosite
+#   hits:
+#     per_page: 10
+#   labels:
+#     input_placeholder: "Search..."
+#     hits_empty: "No results found for '${query}'"
+#     hits_stats: "Found ${hits} results (in ${time} ms)"
 
 ########################################
 # Animation
