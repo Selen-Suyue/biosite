@@ -19,3 +19,10 @@ Robotics has a long way是我现在的感叹。
 至于action和vision，如果抛开知识浓度的高低不谈，谁的熵比较大还真不好说，但是肯定都高于language... 
 
 所以Robotics has a long way...
+
+#ps:
+我需要补充的是，即便world model做出来了，在for action generation的时候考虑的高动态场景也不是world model claim的dynamics prediction
+可以负担的。比如考虑轮盘抓物体这种任务，dynamics预测的未来动态往往是很难和时间精确对齐的。即便对齐了，采集数据时候的时间是没有考虑机器人部署的
+时候涉及的传输，推理，以及可能的试错的时间都，这件事情模仿学习根本解决不了，只可能是强化学习解决。
+
+因此robotics still has a long way.
