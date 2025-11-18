@@ -1,10 +1,10 @@
 ---
 title: '猫的理想'
-cover: /content/imgs/cat.jpg
+cover: https://github.com/Selen-Suyue/biosite/raw/main/content/imgs/cat.jpg
 categor: journal
 tag: Robotics
-date: 2025-11-15
-lastmod: 2025-11-15
+date: 2025-11-18
+lastmod: 2025-11-18
 ---
 
 我现在的感觉越来越强烈，computer vision的研究者和robot learning的研究者的思路是有很大不同的。这导致我的关注点往往会在robot(或者我认为的robot)上让我最兴奋的事情上。emmmm或许
