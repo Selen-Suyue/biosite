@@ -39,7 +39,7 @@ js:
   #   integrity: sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S+jQz7ZBtQXnsXmD+9jDOOY4cL6dCPzlrk
   # instantsearch:
   #   src: webcache|instantsearch.js@4.56.1/dist/instantsearch.production.min.js
-  #   integrity: sha384-hHJCflT4KBLQyHfKO9vpstIcFKn/Y+KHTORelMMEn7mOp2AVPp+7fr03dLgZiV3J
+  #   integrity: sha384-hHJCflT4KBLQyHfKO9vpstIcFKn/Y+KHTORelMMEn7mOp2AVPp+7fr03dLgZiV3J # test
   pace:
     src: webcache|pace-js@1.2.4/pace.min.js
     integrity: sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8
