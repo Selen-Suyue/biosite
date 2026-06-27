@@ -1,0 +1,14 @@
+<article class="blog-card">
+  <div class="blog-card-body">
+    <div class="blog-card-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format .Site.Params.dateFormat }}</time>
+      <span>{{ .ReadingTime }} 分钟阅读</span>
+      {{- range .GetTerms "categories" -}}
+        <a class="blog-category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{- end -}}
+    </div>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <p>{{ .Summary | plainify | truncate 180 }}</p>
+    <a class="blog-card-more" href="{{ .RelPermalink }}" aria-label="阅读全文：{{ .Title }}">阅读全文 <span aria-hidden="true">→</span></a>
+  </div>
+</article>

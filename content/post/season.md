@@ -1,8 +1,8 @@
 ---
 title: '漫长的季节'
 cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/miao5.jpg
-categor: journal
-tag: journal
+categories: ["journal"]
+tags: ["journal"]
 date: 2025-11-26
 lastmod: 2025-11-26
 ---

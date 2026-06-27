@@ -1,8 +1,8 @@
 ---
 title: '理解与生成'
 cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/cai.jpg
-categor: journal
-tag: Research
+categories: ["journal"]
+tags: ["Research"]
 date: 2025-11-13
 lastmod: 2025-11-13
 ---

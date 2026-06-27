@@ -1,0 +1,17 @@
+{{- define "main" -}}
+  <section class="taxonomy-overview">
+    <header class="taxonomy-header">
+      <p class="taxonomy-kicker">Categories</p>
+      <h1>文章分类</h1>
+      <p>按主题浏览全部文章。</p>
+    </header>
+    <div class="taxonomy-grid">
+      {{- range .Data.Terms.Alphabetical -}}
+        <a class="taxonomy-card" href="{{ .Page.RelPermalink }}">
+          <strong>{{ .Page.LinkTitle }}</strong>
+          <span>{{ .Count }} 篇文章</span>
+        </a>
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}

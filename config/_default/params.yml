@@ -11,6 +11,9 @@ menu:
   - name: archives
     url: "archives"
     icon:
+  - name: blog_categories
+    url: "categories"
+    icon:
   - name: about
     url: "about"
     icon:
@@ -30,7 +33,15 @@ author: Selen
 description: "さくら荘の雪"
 subtitle: "さくら荘の雪"
 
-banner: "images/banner.webp"
+# 首页壁纸。可填写 static 目录下的相对路径，也可填写完整 URL。
+# 本地图片示例：把图片放到 static/images/banner.jpg，然后填写 images/banner.jpg。
+banner: "avatar/zhenbai.png"
+
+# 站点外观集中配置。更换壁纸后通常只需调整 position 和 overlay。
+appearance:
+  banner_position: "center 38%" # CSS object-position，例如 center、center top、50% 30%
+  banner_overlay: 0.18          # 0（无遮罩）到 1（全黑），用于保证标题清晰
+  banner_height: "320px"       # 支持 px、vh 等 CSS 单位
 # You can also write it in the form of the following url
 # banner: "https://example.com"
 
@@ -65,15 +76,15 @@ excerpt_link: Read More
 footer:
   since: 2020 # 2020-current year
   powered: true
-  count: true
-  busuanzi: true
+  count: false
+  busuanzi: false
   icon:
     url: "../images/taichi.png" # this path is relative to the css/style.css, so it needs to go up one level to reach the images folder
     rotate: true
     mask: true # whether to use the images as a mask
 
 # Sidebar
-sidebar: right
+sidebar: false
 
 social:
   # email: s3702681@gmail.com
@@ -102,11 +113,7 @@ social:
   # discord: https://discordapp.com/users/yourname
   # steam: https://steamcommunity.com/id/yourname
 
-widgets:
-  - category
-  - tag
-  - tagcloud
-  - recent_posts
+widgets: []
 
 # Widget behavior
 recent_posts_limits: 5
@@ -124,6 +131,7 @@ icon_font: 4552607_tq6stt6tcg
 # https://fonts.google.com/
 # Google Fonts, higher priority than local_font
 font:
+  enable: false
   article:
     - Mulish
     - Noto Serif SC
@@ -146,7 +154,16 @@ local_font:
     - monospace
 
 dark_mode:
-  enable: false # set to true to make your website default to dark mode
+  enable: auto # true / false / auto
+
+########################################
+# Local Search
+########################################
+
+local_search:
+  enable: true
+  placeholder: "搜索文章标题或正文…"
+  max_results: 12
 
 ########################################
 # Analytics
@@ -263,13 +280,13 @@ giscus:
 ########################################
 
 preloader:
-  enable: true
+  enable: false
   text: さくら荘の雪
   icon:  # default use inline svg for fast speed, you can use a image url, like '/images/taichi.png'
 
 # see https://github.com/D-Sketon/aos.js
 animation:
-  enable: true
+  enable: false
   options:
     header:
       title: slide-up
@@ -295,7 +312,7 @@ animation:
 
 # see https://github.com/D-Sketon/mouse-firework
 firework:
-  enable: true
+  enable: false
   options:
     excludeElements: ["a", "button"]
     particles:
@@ -408,4 +425,4 @@ live2d:
 
 # https://github.com/CodeByZach/pace
 pace:
-  enable: true
+  enable: false

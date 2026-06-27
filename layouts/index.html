@@ -1,0 +1,10 @@
+{{- define "main" -}}
+  {{- $posts := where .Site.RegularPages "Section" "in" .Site.Params.mainSections -}}
+  {{- $paginator := .Paginate ($posts.ByDate.Reverse) -}}
+  <div class="blog-list" aria-label="文章列表">
+    {{- range $paginator.Pages -}}
+      {{- partial "post.html" . -}}
+    {{- end -}}
+  </div>
+  {{- partial "pagination.html" . -}}
+{{- end -}}

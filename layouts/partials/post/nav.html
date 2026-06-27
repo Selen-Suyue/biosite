@@ -1,0 +1,23 @@
+{{- /* With Hugo's descending section order, Next is newer and Prev is older. */ -}}
+{{- $newer := .NextInSection -}}
+{{- $older := .PrevInSection -}}
+{{- if or $newer $older -}}
+  <nav id="article-nav" class="article-neighbors" aria-label="相邻文章">
+    {{- with $newer -}}
+      <a class="article-neighbor article-neighbor-newer" rel="prev" href="{{ .RelPermalink }}">
+        <span>← 较新文章</span>
+        <strong>{{ .Title }}</strong>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      </a>
+    {{- else -}}
+      <span class="article-neighbor-placeholder"></span>
+    {{- end -}}
+    {{- with $older -}}
+      <a class="article-neighbor article-neighbor-older" rel="next" href="{{ .RelPermalink }}">
+        <span>较早文章 →</span>
+        <strong>{{ .Title }}</strong>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      </a>
+    {{- end -}}
+  </nav>
+{{- end -}}

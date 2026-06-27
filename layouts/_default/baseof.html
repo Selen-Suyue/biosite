@@ -1,0 +1,109 @@
+<!doctype html>
+<html
+  lang="{{ .Site.Language.LanguageCode }}"
+  {{ if eq .Site.Params.dark_mode.enable true -}}
+    data-theme-mode="true"
+  {{ else if eq .Site.Params.dark_mode.enable false -}}
+    data-theme-mode="false"
+  {{ else if eq .Site.Params.dark_mode.enable "auto" -}}
+    data-theme-mode="auto"
+  {{ end -}}
+>
+  <head>
+    {{- with .Site.Params.injector.head_begin }}{{ . | safeHTML }}{{ end -}}
+    {{- partial "head.html" . -}}
+    <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}" />
+    <style>
+      :root {
+        --site-banner-position: {{ .Site.Params.appearance.banner_position | default "center" }};
+        --site-banner-overlay: {{ .Site.Params.appearance.banner_overlay | default 0.18 }};
+        --site-banner-height: {{ .Site.Params.appearance.banner_height | default "320px" }};
+      }
+    </style>
+    {{- with .Site.Params.injector.head_end }}{{ . | safeHTML }}{{ end -}}
+  </head>
+  <body>
+    {{- with .Site.Params.injector.body_begin }}{{ . | safeHTML }}{{ end -}}
+    {{- partialCached "loader.html" . -}}
+    <div id="container">
+      <div id="wrap">
+        {{- partial "header.html" . -}}
+        <div id="content"
+          {{ if or (and (eq .Site.Params.sidebar "left") (eq .Params.sidebar nil)) (eq .Params.sidebar "left") }}class="sidebar-left"{{ end }}
+          {{ if or (and (eq .Site.Params.sidebar "right") (eq .Params.sidebar nil)) (eq .Params.sidebar "right") }}class="sidebar-right"{{ end }}>
+          {{- partial "sidebar.html" . -}}
+          <section id="main">{{ block "main" . }}{{ end }}</section>
+        </div>
+        {{- partialCached "footer.html" . -}}
+        {{- if .Site.Params.top.enable -}}
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi {{ if .Site.Params.top.icon.rotate }}rotate{{ end }}"></div>
+            <div class="arrow-up"></div>
+          </div>
+        {{- end -}}
+        <div id="mask" class="hide"></div>
+      </div>
+      {{- partial "mobilebar.html" . -}}
+    </div>
+
+    {{- if .Site.Params.local_search.enable -}}
+      <div
+        id="local-search"
+        class="local-search"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="local-search-title"
+        aria-hidden="true"
+        data-index="{{ "search-index.json" | relURL }}"
+        data-max-results="{{ .Site.Params.local_search.max_results | default 12 }}"
+      >
+        <button class="local-search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
+        <section class="local-search-panel">
+          <header class="local-search-header">
+            <div>
+              <span class="local-search-kicker">Search</span>
+              <h2 id="local-search-title">搜索文章</h2>
+            </div>
+            <button class="local-search-close" type="button" data-search-close aria-label="关闭搜索">×</button>
+          </header>
+          <label class="local-search-field">
+            <span aria-hidden="true"></span>
+            <input
+              id="local-search-input"
+              type="search"
+              autocomplete="off"
+              placeholder="{{ .Site.Params.local_search.placeholder | default "搜索文章…" }}"
+            />
+          </label>
+          <p id="local-search-status" class="local-search-status" aria-live="polite">输入关键词开始搜索</p>
+          <div id="local-search-results" class="local-search-results"></div>
+        </section>
+      </div>
+      <script src="{{ "js/local-search.js" | relURL }}" defer></script>
+    {{- end -}}
+
+    {{- if and .Site.Params.player.aplayer.enable (not .Site.Params.player.meting.enable) .Site.Params.player.aplayer.options.fixed -}}
+      <div id="aplayer" theme="var(--color-link)"></div>
+    {{- end -}}
+    {{- if and .Site.Params.player.meting.enable .Site.Params.player.aplayer.options.fixed -}}
+      <meting-js
+        theme="var(--color-link)"
+        {{ with .Site.Params.player.meting.options.id }}id="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.meting.options.server }}server="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.meting.options.type }}type="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.meting.options.auto }}auto="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.fixed }}fixed="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.autoplay }}autoplay="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.loop }}loop="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.order }}order="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.preload }}preload="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.volume }}volume="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.mutex }}mutex="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.listFolded }}list-folded="{{ . }}"{{ end }}
+        {{ with .Site.Params.player.aplayer.options.lrcType }}lrc-type="{{ . }}"{{ end }}>
+      </meting-js>
+    {{- end -}}
+    {{- partial "afterFooter.html" . -}}
+    {{- with .Site.Params.injector.body_end }}{{ . | safeHTML }}{{ end -}}
+  </body>
+</html>

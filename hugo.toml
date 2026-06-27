@@ -1,12 +1,26 @@
 baseURL = 'https://selen-suyue.github.io/biosite/'
-languageCode = 'en-us'
+locale = 'zh-CN'
+defaultContentLanguage = 'zh-cn'
 title = "Selen's Blog"
 
 theme = 'reimu'
 
 
 [outputs]
-home = [ "HTML", "RSS"]
+home = ["HTML", "RSS", "SearchIndex"]
+
+[outputFormats.SearchIndex]
+mediaType = "application/json"
+baseName = "search-index"
+isPlainText = true
+notAlternative = true
+
+[pagination]
+pagerSize = 6
+
+# Keep article navigation consistent with the newest-first home page.
+[page]
+nextPrevInSectionSortOrder = "desc"
 
 # enable search algolia
 

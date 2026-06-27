@@ -1,0 +1,16 @@
+{{- $pag := .Paginator -}}
+{{- if gt $pag.TotalPages 1 -}}
+  <nav id="page-nav" class="blog-pagination" aria-label="文章列表分页">
+    {{- with $pag.Prev -}}
+      <a class="extend prev" rel="prev" href="{{ .URL | relURL }}" aria-label="前往较新的文章列表">← 较新文章</a>
+    {{- else -}}
+      <span class="pagination-spacer"></span>
+    {{- end -}}
+    <span class="pagination-status">{{ $pag.PageNumber }} / {{ $pag.TotalPages }}</span>
+    {{- with $pag.Next -}}
+      <a class="extend next" rel="next" href="{{ .URL | relURL }}" aria-label="前往较早的文章列表">较早文章 →</a>
+    {{- else -}}
+      <span class="pagination-spacer"></span>
+    {{- end -}}
+  </nav>
+{{- end -}}

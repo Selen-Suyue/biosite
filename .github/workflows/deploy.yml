@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: ALGOLIA
 
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
@@ -48,23 +46,6 @@ jobs:
       - name: Build
         run: hugo --minify --gc
 
-      - name: Check if Algolia secrets are set
-        run: |
-          if [ -z "${{ secrets.ALGOLIA_APP_ID }}" ] || [ -z "${{ secrets.ALGOLIA_API_KEY }}" ]; then
-            echo "Algolia App ID or API Key is not set properly!"
-            exit 1
-          else
-            echo "Algolia secrets are set correctly."
-          fi
-
-      - name: Update Algolia Search Index
-        uses: iChochy/Algolia-Upload-Records@main
-        env:
-          APPLICATION_ID: ${{ secrets.ALGOLIA_APP_ID }}
-          ADMIN_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-          INDEX_NAME: biosite
-          FILE_PATH: "public/algolia.json"
-          
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

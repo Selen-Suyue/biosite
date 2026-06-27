@@ -1,8 +1,8 @@
 ---
 title: 'Robotics has a long way'
 cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/qingyin1.jpg
-categor: journal
-tag: Robotics
+categories: ["journal"]
+tags: ["Robotics"]
 date: 2025-11-15
 lastmod: 2025-11-15
 ---
