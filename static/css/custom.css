@@ -1005,35 +1005,3 @@ body.is-post-page .comment {
     line-height: 1.9;
   }
 }
-
-/* Home banner: show the character naturally below the fixed navbar */
-body:not(.is-post-page) #header {
-  height: var(--site-banner-height);
-  min-height: 360px;
-}
-
-/* Use a blurred full-width backdrop so the main image can be contained */
-body:not(.has-page-cover):not(.is-post-page) #header::after {
-  position: absolute;
-  z-index: -3;
-  inset: -28px;
-  background-image: url("../images/covers/guhechu.jpg");
-  background-position: center 22%;
-  background-size: cover;
-  content: "";
-  filter: blur(18px) saturate(0.85);
-  opacity: 0.55;
-  transform: scale(1.06);
-  pointer-events: none;
-}
-
-/* Keep the actual character image complete and away from the nav bar */
-body:not(.has-page-cover):not(.is-post-page) #header > img,
-body:not(.has-page-cover):not(.is-post-page) #header > picture > img {
-  top: 58px;
-  height: calc(100% - 58px);
-  object-fit: contain;
-  object-position: center 22%;
-  -webkit-mask: none;
-  mask: none;
-}
