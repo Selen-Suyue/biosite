@@ -27,6 +27,7 @@ body {
 #header {
   min-height: min(var(--site-banner-height), 72vh);
   height: var(--site-banner-height);
+  overflow: hidden;
   isolation: isolate;
 }
 
@@ -39,12 +40,44 @@ body {
   pointer-events: none;
 }
 
+body.has-page-cover #header::after {
+  position: absolute;
+  z-index: -3;
+  inset: -28px;
+  background-color: var(--site-accent-soft);
+  background-image: var(--page-cover-image);
+  background-position: center;
+  background-size: cover;
+  content: "";
+  filter: blur(18px) saturate(0.82);
+  opacity: 0.58;
+  transform: scale(1.06);
+  pointer-events: none;
+}
+
 #header > img,
 #header > picture > img {
   height: 100%;
   object-position: var(--site-banner-position);
   -webkit-mask: none;
   mask: none;
+}
+
+body.has-page-cover #header > img,
+body.has-page-cover #header > picture > img {
+  z-index: -2;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.94;
+}
+
+body.has-page-cover #header::before {
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 12, 18, calc(var(--site-banner-overlay) * 0.55)),
+    rgba(10, 12, 18, calc(var(--site-banner-overlay) + 0.12))
+  );
 }
 
 #header-title {
@@ -88,6 +121,11 @@ body {
   padding: 19px 12px;
   font-size: 14px;
   font-weight: 650;
+  transition: color 160ms ease;
+}
+
+.main-nav-link:hover {
+  color: var(--site-accent);
 }
 
 #content {
@@ -107,25 +145,77 @@ body {
 
 .blog-card {
   display: grid;
-  grid-template-columns: 1fr;
-  min-height: 0;
+  grid-template-columns: minmax(210px, 32%) 1fr;
+  min-height: 220px;
   overflow: hidden;
   border: 1px solid var(--site-border);
-  border-radius: 18px;
+  border-radius: 16px;
   background: var(--site-surface);
-  box-shadow: var(--site-shadow);
+  box-shadow: 0 10px 32px rgba(29, 32, 40, 0.07);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .blog-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 46px rgba(29, 32, 40, 0.13);
+  transform: translateY(-2px);
+  border-color: rgba(179, 58, 88, 0.22);
+  box-shadow: 0 16px 42px rgba(29, 32, 40, 0.11);
+}
+
+.blog-card-cover {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  background: var(--site-accent-soft);
+}
+
+.blog-card-cover-image {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  transition: transform 280ms ease;
+}
+
+.blog-card-cover.is-unavailable .blog-card-cover-image {
+  display: none;
+}
+
+.blog-card-cover::before,
+.blog-card-cover::after {
+  position: absolute;
+  inset: 0;
+  background-image: var(--blog-cover-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  content: "";
+  transition: transform 280ms ease;
+}
+
+.blog-card-cover::before {
+  z-index: 0;
+  inset: -12px;
+  background-size: cover;
+  filter: blur(12px) saturate(0.72);
+  opacity: 0.42;
+}
+
+.blog-card-cover::after {
+  z-index: 1;
+  background-size: cover;
+}
+
+.blog-card:hover .blog-card-cover::after,
+.blog-card:hover .blog-card-cover-image {
+  transform: scale(1.025);
 }
 
 .blog-card-body {
   display: flex;
   min-width: 0;
-  padding: 26px 30px 24px;
+  padding: 27px 30px 25px;
   flex-direction: column;
 }
 
@@ -248,7 +338,10 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
-  margin: 24px 0 0;
+  position: relative;
+  clear: both;
+  margin: 44px 0 36px !important;
+  overflow: visible;
   background: transparent;
 }
 
@@ -548,6 +641,18 @@ body.search-open {
   opacity: 0.35;
 }
 
+.footer-info-sep {
+  width: auto;
+  margin: 0 8px;
+  background: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+}
+
+.footer-info-sep::before {
+  content: "·";
+}
+
 @media (max-width: 768px) {
   #header {
     min-height: 270px;
@@ -564,6 +669,15 @@ body.search-open {
 
   .blog-card {
     grid-template-columns: 1fr;
+  }
+
+  .blog-card-cover {
+    min-height: 190px;
+    max-height: 220px;
+  }
+
+  .blog-card-cover-image {
+    min-height: 190px;
   }
 
   .blog-card-body {

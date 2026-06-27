@@ -35,12 +35,12 @@ subtitle: "さくら荘の雪"
 
 # 首页壁纸。可填写 static 目录下的相对路径，也可填写完整 URL。
 # 本地图片示例：把图片放到 static/images/banner.jpg，然后填写 images/banner.jpg。
-banner: "avatar/zhenbai.png"
+banner: "imgs/陆城.jpg"
 
 # 站点外观集中配置。更换壁纸后通常只需调整 position 和 overlay。
 appearance:
-  banner_position: "center 38%" # CSS object-position，例如 center、center top、50% 30%
-  banner_overlay: 0.18          # 0（无遮罩）到 1（全黑），用于保证标题清晰
+  banner_position: "center 52%" # CSS object-position，例如 center、center top、50% 30%
+  banner_overlay: 0.24          # 0（无遮罩）到 1（全黑），用于保证标题清晰
   banner_height: "320px"       # 支持 px、vh 等 CSS 单位
 # You can also write it in the form of the following url
 # banner: "https://example.com"
@@ -80,7 +80,7 @@ footer:
   busuanzi: false
   icon:
     url: "../images/taichi.png" # this path is relative to the css/style.css, so it needs to go up one level to reach the images folder
-    rotate: true
+    rotate: false
     mask: true # whether to use the images as a mask
 
 # Sidebar
@@ -362,10 +362,10 @@ clipboard:
 
 # Back To Top
 top:
-  enable: true
+  enable: false
   icon:
     url: "../images/taichi.png" # this path is relative to the css/style.css, so it needs to go up one level to reach the images folder
-    rotate: true
+    rotate: false
     mask: true # whether to use the images as a mask
 
 # whether to display the notification when the article is outdated
@@ -386,7 +386,7 @@ sponsor:
   tip: 请作者喝杯咖啡吧！
   icon:
     url: "../images/taichi.png" # this path is relative to the css/style.css, so it needs to go up one level to reach the images folder
-    rotate: true
+    rotate: false
     mask: true # whether to use the images as a mask
   qr:
     # - name: 支付宝

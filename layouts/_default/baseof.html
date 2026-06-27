@@ -1,6 +1,6 @@
 <!doctype html>
 <html
-  lang="{{ .Site.Language.LanguageCode }}"
+  lang="{{ .Language.Locale }}"
   {{ if eq .Site.Params.dark_mode.enable true -}}
     data-theme-mode="true"
   {{ else if eq .Site.Params.dark_mode.enable false -}}
@@ -22,7 +22,14 @@
     </style>
     {{- with .Site.Params.injector.head_end }}{{ . | safeHTML }}{{ end -}}
   </head>
-  <body>
+  {{- $pageCover := .Params.cover -}}
+  {{- $hasPageCover := and $pageCover (not (strings.HasPrefix (printf "%v" $pageCover) "rgb")) -}}
+  <body
+    {{- if $hasPageCover }}
+      class="has-page-cover"
+      style="{{ printf "--page-cover-image: url(%q);" ($pageCover | relURL) | safeCSS }}"
+    {{- end }}
+  >
     {{- with .Site.Params.injector.body_begin }}{{ . | safeHTML }}{{ end -}}
     {{- partialCached "loader.html" . -}}
     <div id="container">
@@ -104,6 +111,7 @@
       </meting-js>
     {{- end -}}
     {{- partial "afterFooter.html" . -}}
+    <script src="{{ "js/site.js" | relURL }}" defer></script>
     {{- with .Site.Params.injector.body_end }}{{ . | safeHTML }}{{ end -}}
   </body>
 </html>

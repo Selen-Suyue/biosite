@@ -1,6 +1,6 @@
 ---
 title: '猫的理想'
-cover: https://github.com/Selen-Suyue/biosite/raw/main/content/imgs/cat.jpg
+cover: imgs/cat.jpg
 categories: ["journal"]
 tags: ["Robotics"]
 date: 2025-11-18
