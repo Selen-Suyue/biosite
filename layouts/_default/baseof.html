@@ -24,9 +24,12 @@
   </head>
   {{- $pageCover := .Params.cover -}}
   {{- $hasPageCover := and $pageCover (not (strings.HasPrefix (printf "%v" $pageCover) "rgb")) -}}
+  {{- $isPostPage := and .IsPage (in .Site.Params.mainSections .Type) -}}
   <body
+    {{- if or $hasPageCover $isPostPage }}
+      class="{{ if $hasPageCover }}has-page-cover{{ end }}{{ if $isPostPage }} is-post-page{{ end }}"
+    {{- end }}
     {{- if $hasPageCover }}
-      class="has-page-cover"
       style="{{ printf "--page-cover-image: url(%q);" ($pageCover | relURL) | safeCSS }}"
     {{- end }}
   >
@@ -111,7 +114,6 @@
       </meting-js>
     {{- end -}}
     {{- partial "afterFooter.html" . -}}
-    <script src="{{ "js/site.js" | relURL }}" defer></script>
     {{- with .Site.Params.injector.body_end }}{{ . | safeHTML }}{{ end -}}
   </body>
 </html>

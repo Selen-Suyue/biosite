@@ -14,12 +14,6 @@ menu:
   - name: blog_categories
     url: "categories"
     icon:
-  - name: about
-    url: "about"
-    icon:
-  - name: friend
-    url: "friend"
-    icon:
 
 mainSections: ["post"]
 # 年，月，日及时间的格式化样式
@@ -35,12 +29,12 @@ subtitle: "さくら荘の雪"
 
 # 首页壁纸。可填写 static 目录下的相对路径，也可填写完整 URL。
 # 本地图片示例：把图片放到 static/images/banner.jpg，然后填写 images/banner.jpg。
-banner: "imgs/陆城.jpg"
+banner: "images/covers/guhechu.jpg"
 
 # 站点外观集中配置。更换壁纸后通常只需调整 position 和 overlay。
 appearance:
-  banner_position: "center 52%" # CSS object-position，例如 center、center top、50% 30%
-  banner_overlay: 0.24          # 0（无遮罩）到 1（全黑），用于保证标题清晰
+  banner_position: "center 45%" # CSS object-position，例如 center、center top、50% 30%
+  banner_overlay: 0.22          # 0（无遮罩）到 1（全黑），用于保证标题清晰
   banner_height: "320px"       # 支持 px、vh 等 CSS 单位
 # You can also write it in the form of the following url
 # banner: "https://example.com"
@@ -75,7 +69,7 @@ excerpt_link: Read More
 
 footer:
   since: 2020 # 2020-current year
-  powered: true
+  powered: false
   count: false
   busuanzi: false
   icon:

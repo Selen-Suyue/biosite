@@ -1,26 +1,17 @@
-<article class="blog-card">
-  {{- with .Params.cover -}}
-    {{- if not (strings.HasPrefix (printf "%v" .) "rgb") -}}
-      <a
-        class="blog-card-cover"
-        href="{{ $.RelPermalink }}"
-        aria-label="查看文章：{{ $.Title }}"
-        style="{{ printf "--blog-cover-image: url(%q);" (. | relURL) | safeCSS }}"
-      >
-        <img class="blog-card-cover-image" src="{{ . | relURL }}" alt="" loading="lazy" />
-      </a>
-    {{- end -}}
-  {{- end -}}
-  <div class="blog-card-body">
-    <div class="blog-card-meta">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format .Site.Params.dateFormat }}</time>
-      <span>{{ .ReadingTime }} 分钟阅读</span>
-      {{- range .GetTerms "categories" -}}
-        <a class="blog-category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+<article class="post-row">
+  <a class="post-row-link" href="{{ .RelPermalink }}" aria-label="阅读：{{ .Title }}">
+    <time class="post-row-date" datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "2006-01-02" }}
+    </time>
+    <div class="post-row-main">
+      <h2>{{ .Title }}</h2>
+      <p>{{ .Summary | plainify | truncate 150 }}</p>
+      {{- with .Params.tags -}}
+        <div class="post-row-tags" aria-label="标签">
+          {{- range . }}<span>#{{ . }}</span>{{ end -}}
+        </div>
       {{- end -}}
     </div>
-    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    <p>{{ .Summary | plainify | truncate 180 }}</p>
-    <a class="blog-card-more" href="{{ .RelPermalink }}" aria-label="阅读全文：{{ .Title }}">阅读全文 <span aria-hidden="true">→</span></a>
-  </div>
+    <span class="post-row-reading">{{ .ReadingTime }} min read</span>
+  </a>
 </article>

@@ -1,6 +1,6 @@
 ---
 title: '理解与生成'
-cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/cai.jpg
+cover: images/covers/cai.jpg
 categories: ["journal"]
 tags: ["Research"]
 date: 2025-11-13

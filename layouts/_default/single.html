@@ -1,0 +1,41 @@
+{{- define "main" -}}
+  <article class="post-page h-entry" itemscope itemtype="https://schema.org/BlogPosting">
+    {{- with .Params.cover -}}
+      {{- if not (strings.HasPrefix (printf "%v" .) "rgb") -}}
+        <figure
+          class="post-hero"
+          style="{{ printf "--post-hero-image: url(%q);" (. | relURL) | safeCSS }}"
+        >
+          <div class="post-hero-blur" aria-hidden="true"></div>
+          <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
+        </figure>
+      {{- end -}}
+    {{- end -}}
+
+    <header class="post-page-header">
+      <div class="post-page-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        {{- if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") -}}
+          <span>更新于 {{ .Lastmod.Format "2006-01-02" }}</span>
+        {{- end -}}
+        <span>{{ .ReadingTime }} min read</span>
+      </div>
+      <h1 itemprop="headline">{{ .Title }}</h1>
+      <div class="post-page-taxonomy">
+        {{- range .GetTerms "categories" -}}
+          <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        {{- end -}}
+        {{- range .GetTerms "tags" -}}
+          <a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
+        {{- end -}}
+      </div>
+    </header>
+
+    <div class="post-page-content article-entry" itemprop="articleBody">
+      {{ .Content | safeHTML }}
+    </div>
+
+    {{- partial "post/nav.html" . -}}
+  </article>
+  {{- partial "comment.html" . -}}
+{{- end -}}

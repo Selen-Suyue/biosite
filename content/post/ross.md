@@ -1,6 +1,6 @@
 ---
 title: '千朵玫瑰带来黎明'
-cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/sheng.png
+cover: images/covers/sheng.png
 categories: ["journal"]
 tags: ["rose"]
 date: 2025-12-11

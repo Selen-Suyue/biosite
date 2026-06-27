@@ -1,6 +1,6 @@
 ---
 title: '写在蝉鸣时'
-cover: https://github.com/Selen-Suyue/Wallpaper/raw/main/guhechu.jpg
+cover: images/covers/guhechu.jpg
 categories: ["journal"]
 tags: ["Final Exam"]
 date: 2025-06-14
