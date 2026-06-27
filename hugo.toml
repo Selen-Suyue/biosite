@@ -4,10 +4,11 @@ defaultContentLanguage = 'zh-cn'
 title = "Selen's Blog"
 
 theme = 'reimu'
+disableKinds = ['rss']
 
 
 [outputs]
-home = ["HTML", "RSS", "SearchIndex"]
+home = ["HTML", "SearchIndex"]
 
 [outputFormats.SearchIndex]
 mediaType = "application/json"

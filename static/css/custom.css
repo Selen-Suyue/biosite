@@ -483,6 +483,10 @@ body.has-page-cover #header::before {
   letter-spacing: 0.04em;
 }
 
+#nav-rss-link {
+  display: none !important;
+}
+
 #nav-sun-btn::before {
   content: "☀";
 }
@@ -725,13 +729,17 @@ body.search-open {
 
 .post-row-link {
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr) 88px;
+  grid-template-columns: 112px 176px minmax(0, 1fr) 88px;
   gap: 22px;
   align-items: start;
   padding: 24px 6px;
   color: var(--color-default);
   text-decoration: none;
   transition: background-color 160ms ease;
+}
+
+.post-row:not(.has-thumbnail) .post-row-link {
+  grid-template-columns: 112px minmax(0, 1fr) 88px;
 }
 
 .post-row-link:hover {
@@ -752,6 +760,39 @@ body.search-open {
 
 .post-row-main {
   min-width: 0;
+}
+
+.post-row-thumbnail {
+  position: relative;
+  display: block;
+  width: 176px;
+  height: 108px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--site-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--site-border);
+}
+
+.post-row-thumbnail::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  content: "";
+  pointer-events: none;
+}
+
+.post-row-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 260ms ease, filter 260ms ease;
+}
+
+.post-row-link:hover .post-row-thumbnail img {
+  filter: saturate(1.05);
+  transform: scale(1.035);
 }
 
 .post-row-main h2 {
@@ -806,30 +847,35 @@ body.is-post-page #content {
 .post-hero {
   position: relative;
   width: 100%;
-  height: clamp(320px, 47vw, 520px);
+  height: clamp(360px, 48vw, 560px);
   margin: 0 0 46px;
   overflow: hidden;
-  border: 1px solid var(--site-border);
-  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 22px;
   background: var(--site-accent-soft);
-  box-shadow: 0 16px 44px rgba(29, 32, 40, 0.09);
+  box-shadow:
+    0 28px 72px rgba(29, 32, 40, 0.14),
+    0 4px 18px rgba(29, 32, 40, 0.08);
 }
 
 .post-hero-blur {
   position: absolute;
-  inset: -28px;
+  inset: -46px;
   background-image: var(--post-hero-image);
   background-position: center;
   background-size: cover;
-  filter: blur(22px) saturate(0.78);
-  opacity: 0.58;
-  transform: scale(1.06);
+  filter: blur(34px) saturate(0.96) brightness(0.78);
+  opacity: 0.82;
+  transform: scale(1.14);
 }
 
 .post-hero::after {
   position: absolute;
   inset: 0;
-  background: rgba(12, 14, 18, 0.08);
+  z-index: 2;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 32%),
+    linear-gradient(0deg, rgba(8, 10, 16, 0.13), transparent 36%);
   content: "";
   pointer-events: none;
 }
@@ -838,8 +884,14 @@ body.is-post-page #content {
   position: relative;
   z-index: 1;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 64px);
+  height: calc(100% - 64px);
+  margin: 32px;
+  border-radius: 13px;
+  box-shadow:
+    0 18px 44px rgba(8, 10, 16, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.16);
+  filter: saturate(0.98) contrast(1.015);
   object-fit: contain;
 }
 
@@ -965,7 +1017,7 @@ body.is-post-page .comment {
 
 @media (max-width: 768px) {
   .post-row-link {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 104px minmax(0, 1fr);
     gap: 8px 14px;
     padding: 20px 2px;
   }
@@ -981,8 +1033,22 @@ body.is-post-page .comment {
   }
 
   .post-row-main {
-    grid-column: 1 / -1;
+    grid-column: 2;
     grid-row: 2;
+  }
+
+  .post-row-thumbnail {
+    grid-column: 1;
+    grid-row: 2;
+    width: 104px;
+    height: 78px;
+  }
+
+  .post-row-main p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   body.is-post-page #content {
@@ -990,10 +1056,17 @@ body.is-post-page .comment {
   }
 
   .post-hero {
-    height: min(62vw, 360px);
+    height: min(72vw, 380px);
     min-height: 230px;
     margin-bottom: 32px;
     border-radius: 12px;
+  }
+
+  .post-hero img {
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
+    margin: 12px;
+    border-radius: 9px;
   }
 
   .post-page-header h1 {

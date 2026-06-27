@@ -1,8 +1,15 @@
-<article class="post-row">
+<article class="post-row{{ with .Params.cover }} has-thumbnail{{ end }}">
   <a class="post-row-link" href="{{ .RelPermalink }}" aria-label="阅读：{{ .Title }}">
     <time class="post-row-date" datetime="{{ .Date.Format "2006-01-02" }}">
       {{ .Date.Format "2006-01-02" }}
     </time>
+    {{- with .Params.cover -}}
+      {{- if not (strings.HasPrefix (printf "%v" .) "rgb") -}}
+        <span class="post-row-thumbnail" aria-hidden="true">
+          <img src="{{ . | relURL }}" alt="" loading="lazy" />
+        </span>
+      {{- end -}}
+    {{- end -}}
     <div class="post-row-main">
       <h2>{{ .Title }}</h2>
       <p>{{ .Summary | plainify | truncate 150 }}</p>
