@@ -2,7 +2,7 @@
 title: '写在蝉鸣时'
 cover: images/covers/guhechu.jpg
 categories: ["journal"]
-tags: ["Final Exam"]
+tags: ["随感"]
 date: 2025-06-14
 lastmod: 2025-06-14
 ---

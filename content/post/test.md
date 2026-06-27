@@ -2,7 +2,7 @@
 title: '理解与生成'
 cover: images/covers/cai.jpg
 categories: ["journal"]
-tags: ["Research"]
+tags: ["多模态"]
 date: 2025-11-13
 lastmod: 2025-11-13
 ---

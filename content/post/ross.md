@@ -2,7 +2,7 @@
 title: '千朵玫瑰带来黎明'
 cover: images/covers/sheng.png
 categories: ["journal"]
-tags: ["rose"]
+tags: ["随感"]
 date: 2025-12-11
 lastmod: 2025-12-11
 ---

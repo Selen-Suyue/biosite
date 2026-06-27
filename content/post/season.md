@@ -2,7 +2,7 @@
 title: '漫长的季节'
 cover: images/covers/miao5.jpg
 categories: ["journal"]
-tags: ["journal"]
+tags: ["随感"]
 date: 2025-11-26
 lastmod: 2025-11-26
 ---
