@@ -33,9 +33,9 @@ banner: "images/covers/guhechu.jpg"
 
 # 站点外观集中配置。更换壁纸后通常只需调整 position 和 overlay。
 appearance:
-  banner_position: "center 45%" # CSS object-position，例如 center、center top、50% 30%
-  banner_overlay: 0.22          # 0（无遮罩）到 1（全黑），用于保证标题清晰
-  banner_height: "320px"       # 支持 px、vh 等 CSS 单位
+  banner_position: "center 22%"
+  banner_overlay: 0.18
+  banner_height: "clamp(360px, 42vh, 460px)"
 # You can also write it in the form of the following url
 # banner: "https://example.com"
 
