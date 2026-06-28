@@ -483,7 +483,8 @@ body.has-page-cover #header::before {
   letter-spacing: 0.04em;
 }
 
-#nav-rss-link {
+#nav-rss-link,
+#nav-circle-half-stroke-btn {
   display: none !important;
 }
 

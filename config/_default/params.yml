@@ -78,7 +78,8 @@ footer:
     mask: true # whether to use the images as a mask
 
 # Sidebar
-sidebar: false
+# Enable the common sidebar on desktop too; mobile already shows it as a slide-out menu.
+sidebar: left
 
 social:
   # email: s3702681@gmail.com
