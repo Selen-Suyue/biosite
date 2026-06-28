@@ -149,7 +149,8 @@ local_font:
     - monospace
 
 dark_mode:
-  enable: auto # true / false / auto
+  # Use an explicit light/dark toggle instead of the system/auto state.
+  enable: false # true / false / auto
 
 ########################################
 # Local Search
