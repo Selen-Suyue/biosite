@@ -1078,3 +1078,80 @@ body.is-post-page .comment {
     line-height: 1.9;
   }
 }
+
+@media (min-width: 769px) {
+  #content.sidebar-left,
+  #content.sidebar-right {
+    display: block;
+  }
+
+  #content.sidebar-left #main,
+  #content.sidebar-right #main {
+    max-width: 860px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  #sidebar {
+    position: fixed !important;
+    top: 86px;
+    left: 32px;
+    z-index: 1200;
+    width: min(340px, calc(100vw - 64px));
+    max-height: calc(100vh - 118px);
+    padding: 0;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(-18px, 0, 0) scale(0.98);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  body.desktop-sidebar-open #sidebar {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  #sidebar .sidebar-wrap,
+  #sidebar .sidebar-top,
+  #sidebar .sidebar-toc,
+  #sidebar .sidebar-common {
+    border: 1px solid rgba(255, 126, 141, 0.16);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 22px 60px rgba(68, 42, 49, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  [data-theme="dark"] #sidebar .sidebar-wrap,
+  [data-theme="dark"] #sidebar .sidebar-top,
+  [data-theme="dark"] #sidebar .sidebar-toc,
+  [data-theme="dark"] #sidebar .sidebar-common {
+    border-color: rgba(255, 126, 141, 0.2);
+    background: rgba(25, 24, 28, 0.88);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.32);
+  }
+
+  body.desktop-sidebar-open #mask,
+  body.desktop-sidebar-open #mask.hide {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(18, 16, 20, 0.28);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .desktop-sidebar-toggle {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+  }
+}

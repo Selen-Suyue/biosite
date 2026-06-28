@@ -91,6 +91,7 @@
       </div>
       <script src="{{ "js/local-search.js" | relURL }}" defer></script>
     {{- end -}}
+    <script src="{{ "js/desktop-sidebar.js" | relURL }}" defer></script>
 
     {{- if and .Site.Params.player.aplayer.enable (not .Site.Params.player.meting.enable) .Site.Params.player.aplayer.options.fixed -}}
       <div id="aplayer" theme="var(--color-link)"></div>
