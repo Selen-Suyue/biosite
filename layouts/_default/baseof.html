@@ -115,6 +115,7 @@
       </meting-js>
     {{- end -}}
     {{- partial "afterFooter.html" . -}}
+    <script src="{{ "js/theme-toggle-override.js" | relURL }}" defer></script>
     {{- with .Site.Params.injector.body_end }}{{ . | safeHTML }}{{ end -}}
   </body>
 </html>
