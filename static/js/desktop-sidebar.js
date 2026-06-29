@@ -6,6 +6,19 @@
   const getToggle = () => document.getElementById('desktop-sidebar-toggle');
   const getCloseButton = () => document.getElementById('desktop-sidebar-close');
 
+  const closeMobileNav = () => {
+    document.body.classList.remove('mobile-nav-on');
+    document.getElementById('mask')?.classList.add('hide');
+    document.getElementById('mobile-nav')?.setAttribute('aria-hidden', 'true');
+    document.getElementById('main-nav-toggle')?.setAttribute('aria-expanded', 'false');
+  };
+
+  const syncMobileNav = () => {
+    const open = document.body.classList.contains('mobile-nav-on');
+    document.getElementById('mobile-nav')?.setAttribute('aria-hidden', String(!open));
+    document.getElementById('main-nav-toggle')?.setAttribute('aria-expanded', String(open));
+  };
+
   const closeSidebar = () => {
     document.body.classList.remove('desktop-sidebar-open');
     const button = getToggle();
@@ -88,10 +101,20 @@
   document.addEventListener('DOMContentLoaded', () => {
     ensureToggle();
 
+    document.getElementById('main-nav-toggle')?.setAttribute('aria-expanded', 'false');
+
     findMask()?.addEventListener('click', closeSidebar);
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeSidebar();
+      if (event.key === 'Escape') {
+        closeSidebar();
+        closeMobileNav();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('.mobile-nav-close')) closeMobileNav();
+      if (event.target.closest('#main-nav-toggle')) requestAnimationFrame(syncMobileNav);
     });
 
     desktopQuery.addEventListener?.('change', () => {
