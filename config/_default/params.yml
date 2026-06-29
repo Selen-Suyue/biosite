@@ -14,6 +14,9 @@ menu:
   - name: blog_categories
     url: "categories"
     icon:
+  - name: about
+    url: "https://selen-suyue.github.io/"
+    icon:
 
 mainSections: ["post"]
 # 年，月，日及时间的格式化样式

@@ -10,6 +10,16 @@
   {{ end -}}
 >
   <head>
+    <script>
+      (() => {
+        try {
+          const mode = localStorage.getItem('dark_mode');
+          const dark = mode === 'true' || (mode === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.toggleAttribute('data-theme', dark);
+          if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (_) {}
+      })();
+    </script>
     {{- with .Site.Params.injector.head_begin }}{{ . | safeHTML }}{{ end -}}
     {{- partial "head.html" . -}}
     <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}" />
@@ -91,7 +101,7 @@
       </div>
       <script src="{{ "js/local-search.js" | relURL }}" defer></script>
     {{- end -}}
-    <script src="{{ "js/desktop-sidebar.js" | relURL }}" defer></script>
+    <script src="{{ "js/navigation.js" | relURL }}" defer></script>
 
     {{- if and .Site.Params.player.aplayer.enable (not .Site.Params.player.meting.enable) .Site.Params.player.aplayer.options.fixed -}}
       <div id="aplayer" theme="var(--color-link)"></div>
