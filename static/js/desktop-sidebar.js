@@ -3,17 +3,30 @@
 
   const findSidebar = () => document.getElementById('sidebar') || document.querySelector('.sidebar');
   const findMask = () => document.getElementById('mask');
+  const getToggle = () => document.getElementById('desktop-sidebar-toggle');
+  const getCloseButton = () => document.getElementById('desktop-sidebar-close');
 
   const closeSidebar = () => {
     document.body.classList.remove('desktop-sidebar-open');
-    const button = document.getElementById('desktop-sidebar-toggle');
+    const button = getToggle();
     if (button) button.setAttribute('aria-expanded', 'false');
+    const sidebar = findSidebar();
+    if (sidebar) sidebar.setAttribute('aria-hidden', 'true');
+    const closeButton = getCloseButton();
+    if (closeButton) closeButton.setAttribute('tabindex', '-1');
   };
 
   const openSidebar = () => {
     document.body.classList.add('desktop-sidebar-open');
-    const button = document.getElementById('desktop-sidebar-toggle');
+    const button = getToggle();
     if (button) button.setAttribute('aria-expanded', 'true');
+    const sidebar = findSidebar();
+    if (sidebar) sidebar.setAttribute('aria-hidden', 'false');
+    const closeButton = getCloseButton();
+    if (closeButton) {
+      closeButton.removeAttribute('tabindex');
+      closeButton.focus({ preventScroll: true });
+    }
   };
 
   const toggleSidebar = () => {
@@ -45,6 +58,31 @@
 
     wrap.appendChild(button);
     nav.appendChild(wrap);
+
+    sidebar.setAttribute('aria-hidden', 'true');
+
+    if (!document.getElementById('desktop-sidebar-toolbar')) {
+      const toolbar = document.createElement('div');
+      toolbar.id = 'desktop-sidebar-toolbar';
+      toolbar.className = 'desktop-sidebar-toolbar';
+
+      const title = document.createElement('span');
+      title.className = 'desktop-sidebar-title';
+      title.textContent = '关于';
+
+      const closeButton = document.createElement('button');
+      closeButton.id = 'desktop-sidebar-close';
+      closeButton.className = 'desktop-sidebar-close';
+      closeButton.type = 'button';
+      closeButton.setAttribute('aria-label', '关闭关于侧栏');
+      closeButton.setAttribute('tabindex', '-1');
+      closeButton.textContent = '×';
+      closeButton.addEventListener('click', closeSidebar);
+
+      toolbar.appendChild(title);
+      toolbar.appendChild(closeButton);
+      sidebar.prepend(toolbar);
+    }
   };
 
   document.addEventListener('DOMContentLoaded', () => {
