@@ -24,8 +24,8 @@ dateFormat: "2006-01-02"
 timeFormat: "2006-01-02 15:04:05"
 
 author: Selen
-description: "我正在下着雨的无锡"
-subtitle: "我正在下着雨的无锡"
+description: "铭刻时间的歌"
+subtitle: "铭刻时间的歌"
 
 # 首页壁纸。可填写 static 目录下的相对路径，也可填写完整 URL。
 # 本地图片示例：把图片放到 static/images/banner.jpg，然后填写 images/banner.jpg。
@@ -277,7 +277,7 @@ giscus:
 
 preloader:
   enable: false
-  text: 我正在下着雨的无锡
+  text: 铭刻时间的歌
   icon:  # default use inline svg for fast speed, you can use a image url, like '/images/taichi.png'
 
 # see https://github.com/D-Sketon/aos.js
