@@ -1,7 +1,7 @@
 baseURL = 'https://selen-suyue.github.io/biosite/'
 locale = 'zh-CN'
 defaultContentLanguage = 'zh-cn'
-title = "Selen's Blog"
+title = "Selen's Blogs"
 
 theme = 'reimu'
 disableKinds = ['rss']
