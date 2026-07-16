@@ -2,7 +2,7 @@
 {{- if gt $pag.TotalPages 1 -}}
   <nav id="page-nav" class="blog-pagination" aria-label="文章列表分页">
     {{- with $pag.Prev -}}
-      <a class="extend prev" rel="prev" href="{{ .URL | relURL }}" aria-label="前往较新的文章列表">← later</a>
+      <a class="extend prev" rel="prev" href="{{ .URL | relURL }}" aria-label="前往较新的文章列表">← Later</a>
     {{- else -}}
       <span class="pagination-spacer"></span>
     {{- end -}}
