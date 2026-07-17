@@ -3,8 +3,8 @@ title: 'Kindred Chapter 1'
 cover: imgs/kindred_1.png
 categories: ["novel"]
 tags: ["kindred"]
-date: 2025-12-17
-lastmod: 2025-12-17
+date: 2026-07-17
+lastmod: 2026-07-17
 ---
 
 # 第一章　欢迎来到 Kindred
