@@ -4,10 +4,12 @@ cover: imgs/kindred_11.png
 categories: ["novel"]
 tags: ["kindred"]
 date: 2026-07-27
-lastmod: 2026-08-21
+lastmod: 2026-08-23
 ---
 
 # 第十一章　公审
+
+> 阅读本章前，请先阅读[序章《第一场葬礼》](/biosite/post/kindred_prologue/)。
 
 公审当晚，中央剧场没有售票。
 
