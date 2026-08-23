@@ -1,0 +1,84 @@
+{{- $tags := .Params.tags | default (slice) -}}
+{{- if and .IsPage (in $tags "kindred") -}}
+  {{- $currentPermalink := .RelPermalink -}}
+  {{- $chapters := slice
+    (dict "path" "/post/kindred_prologue" "label" "序章" "title" "第一场葬礼")
+    (dict "path" "/post/kindred_1" "label" "第一章" "title" "欢迎来到 Kindred")
+    (dict "path" "/post/kindred_2" "label" "第二章" "title" "猎人")
+    (dict "path" "/post/kindred_3" "label" "第三章" "title" "旧书店")
+    (dict "path" "/post/kindred_4" "label" "第四章" "title" "第一次误判")
+    (dict "path" "/post/kindred_5" "label" "第五章" "title" "百分之三十")
+    (dict "path" "/post/kindred_6" "label" "第六章" "title" "关系测试")
+    (dict "path" "/post/kindred_7" "label" "第七章" "title" "百分之五十")
+    (dict "path" "/post/kindred_8" "label" "第八章" "title" "继承体")
+    (dict "path" "/post/kindred_9" "label" "第九章" "title" "判别器崩溃")
+    (dict "path" "/post/kindred_10" "label" "第十章" "title" "百分之九十")
+    (dict "path" "/post/kindred_11" "label" "第十一章" "title" "公审")
+    (dict "path" "/post/kindred_12" "label" "第十二章" "title" "无法证明的人")
+    (dict "path" "/post/kindred_epilogue" "label" "尾声" "title" "折角")
+  -}}
+
+  <div class="kindred-toc-widget" data-kindred-toc>
+    <button
+      class="kindred-toc-trigger"
+      type="button"
+      aria-expanded="false"
+      aria-controls="kindred-toc-panel"
+    >
+      <span class="kindred-toc-trigger-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path d="M4.5 5.2c2.8-.7 5-.2 7.5 1.4v12c-2.5-1.6-4.7-2.1-7.5-1.4zM19.5 5.2c-2.8-.7-5-.2-7.5 1.4v12c2.5-1.6 4.7-2.1 7.5-1.4z" />
+        </svg>
+      </span>
+      <span class="kindred-toc-trigger-copy">
+        <span>KINDRED</span>
+        <strong>小说目录</strong>
+      </span>
+      <span class="kindred-toc-trigger-action" aria-hidden="true">展开</span>
+    </button>
+
+    <button
+      class="kindred-toc-backdrop"
+      type="button"
+      data-kindred-toc-close
+      aria-label="关闭 Kindred 小说目录"
+      tabindex="-1"
+    ></button>
+
+    <aside
+      id="kindred-toc-panel"
+      class="kindred-toc-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="kindred-toc-title"
+    >
+      <header class="kindred-toc-header">
+        <div>
+          <span class="kindred-toc-kicker">KINDRED</span>
+          <h2 id="kindred-toc-title">小说目录</h2>
+          <p>序章 · 十二章 · 尾声</p>
+        </div>
+        <button class="kindred-toc-close" type="button" data-kindred-toc-close aria-label="关闭小说目录">×</button>
+      </header>
+
+      <nav class="kindred-toc-list" aria-label="Kindred 小说章节">
+        {{- range $chapters -}}
+          {{- $chapter := . -}}
+          {{- with $.Site.GetPage $chapter.path -}}
+            {{- $isCurrent := eq .RelPermalink $currentPermalink -}}
+            <a
+              class="kindred-toc-link{{ if $isCurrent }} is-current{{ end }}"
+              href="{{ .RelPermalink }}"
+              {{- if $isCurrent }} aria-current="page"{{ end }}
+            >
+              <span class="kindred-toc-chapter">{{ $chapter.label }}</span>
+              <span class="kindred-toc-name">{{ $chapter.title }}</span>
+              <span class="kindred-toc-arrow" aria-hidden="true">→</span>
+            </a>
+          {{- end -}}
+        {{- end -}}
+      </nav>
+    </aside>
+  </div>
+{{- end -}}
