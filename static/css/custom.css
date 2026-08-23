@@ -1337,77 +1337,79 @@ body.is-post-page .comment {
 
 /* Kindred floating novel directory */
 .kindred-toc-widget {
-  --kindred-navy: #071521;
-  --kindred-navy-soft: #102636;
-  --kindred-gold: #cfaa6d;
-  --kindred-ivory: #f7f0e4;
-  --kindred-muted: #b8c2c7;
+  --kindred-accent: var(--site-accent);
+  --kindred-accent-soft: var(--site-accent-soft);
+  --kindred-border: var(--site-border);
+  --kindred-muted: var(--site-muted);
+  --kindred-surface: var(--site-surface);
+  --kindred-text: var(--color-default);
 }
 
 .kindred-toc-trigger {
   position: fixed;
-  right: max(22px, env(safe-area-inset-right));
-  bottom: max(24px, env(safe-area-inset-bottom));
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
   z-index: 4100;
   display: flex;
   align-items: center;
-  width: 204px;
-  min-height: 64px;
-  padding: 10px 11px;
+  width: 136px;
+  min-height: 48px;
+  padding: 7px 9px;
   overflow: hidden;
-  color: var(--kindred-ivory);
+  color: var(--kindred-text);
   font: inherit;
   text-align: left;
   cursor: pointer;
-  background:
-    radial-gradient(circle at 18% 12%, rgba(207, 170, 109, 0.22), transparent 34%),
-    linear-gradient(145deg, #122b3c, var(--kindred-navy) 72%);
-  border: 1px solid rgba(207, 170, 109, 0.72);
-  border-radius: 18px;
-  box-shadow: 0 15px 38px rgba(4, 12, 19, 0.3), 0 0 0 4px rgba(207, 170, 109, 0.1);
+  background: color-mix(in srgb, var(--kindred-surface) 96%, var(--kindred-accent-soft));
+  border: 1px solid color-mix(in srgb, var(--kindred-accent) 24%, var(--kindred-border));
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(29, 32, 40, 0.14);
+  backdrop-filter: blur(16px) saturate(1.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.08);
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
-.kindred-toc-trigger::after {
+.kindred-toc-trigger::before {
   position: absolute;
-  top: 0;
-  right: -26px;
-  width: 70px;
-  height: 100%;
+  top: 7px;
+  bottom: 7px;
+  left: 0;
+  width: 3px;
   content: "";
-  background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-  transform: skewX(-18deg);
+  background: var(--kindred-accent);
+  border-radius: 0 99px 99px 0;
 }
 
 .kindred-toc-trigger:hover {
-  border-color: var(--kindred-gold);
-  box-shadow: 0 18px 42px rgba(4, 12, 19, 0.4), 0 0 0 5px rgba(207, 170, 109, 0.15);
-  transform: translateY(-3px);
+  color: var(--kindred-accent);
+  border-color: color-mix(in srgb, var(--kindred-accent) 58%, var(--kindred-border));
+  box-shadow: 0 12px 34px rgba(29, 32, 40, 0.18), 0 0 0 3px var(--kindred-accent-soft);
+  transform: translateY(-2px);
 }
 
 .kindred-toc-trigger:focus-visible,
 .kindred-toc-close:focus-visible,
 .kindred-toc-link:focus-visible {
-  outline: 3px solid #f0c77f;
+  outline: 3px solid var(--kindred-accent);
   outline-offset: 3px;
 }
 
 .kindred-toc-trigger-icon {
   display: grid;
-  flex: 0 0 42px;
-  width: 42px;
-  height: 42px;
-  margin-right: 10px;
-  color: var(--kindred-gold);
-  background: rgba(207, 170, 109, 0.12);
-  border: 1px solid rgba(207, 170, 109, 0.42);
-  border-radius: 50%;
+  flex: 0 0 31px;
+  width: 31px;
+  height: 31px;
+  margin-right: 8px;
+  color: var(--kindred-accent);
+  background: var(--kindred-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--kindred-accent) 18%, var(--kindred-border));
+  border-radius: 9px;
   place-items: center;
 }
 
 .kindred-toc-trigger-icon svg {
-  width: 25px;
-  height: 25px;
+  width: 19px;
+  height: 19px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -1423,8 +1425,8 @@ body.is-post-page .comment {
 }
 
 .kindred-toc-trigger-copy > span {
-  color: var(--kindred-gold);
-  font-size: 9px;
+  color: var(--kindred-muted);
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.2em;
 }
@@ -1432,17 +1434,18 @@ body.is-post-page .comment {
 .kindred-toc-trigger-copy strong {
   margin-top: 2px;
   font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
   white-space: nowrap;
 }
 
 .kindred-toc-trigger-action {
-  align-self: flex-end;
-  margin: 0 1px 2px 6px;
-  color: var(--kindred-muted);
-  font-size: 10px;
+  align-self: center;
+  margin-left: 5px;
+  color: var(--kindred-accent);
+  font-size: 20px;
+  line-height: 1;
 }
 
 .kindred-toc-backdrop {
@@ -1453,7 +1456,7 @@ body.is-post-page .comment {
   pointer-events: none;
   cursor: default;
   visibility: hidden;
-  background: rgba(2, 8, 13, 0.62);
+  background: rgba(14, 16, 22, 0.48);
   border: 0;
   opacity: 0;
   backdrop-filter: blur(4px);
@@ -1467,17 +1470,17 @@ body.is-post-page .comment {
   z-index: 4200;
   display: flex;
   flex-direction: column;
-  width: min(410px, calc(100vw - 30px));
+  width: min(370px, calc(100vw - 30px));
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  color: var(--kindred-ivory);
+  color: var(--kindred-text);
   visibility: hidden;
-  background:
-    radial-gradient(circle at 100% 0, rgba(207, 170, 109, 0.16), transparent 31%),
-    linear-gradient(160deg, var(--kindred-navy-soft), var(--kindred-navy) 46%);
-  border-left: 1px solid rgba(207, 170, 109, 0.4);
-  box-shadow: -28px 0 60px rgba(2, 8, 13, 0.35);
+  background: color-mix(in srgb, var(--kindred-surface) 97%, transparent);
+  border-left: 1px solid var(--kindred-border);
+  box-shadow: -24px 0 64px rgba(29, 32, 40, 0.2);
+  backdrop-filter: blur(22px) saturate(1.1);
+  -webkit-backdrop-filter: blur(22px) saturate(1.1);
   opacity: 0;
   transform: translateX(104%);
   transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, visibility 260ms ease;
@@ -1505,22 +1508,22 @@ body.kindred-toc-open {
   flex: 0 0 auto;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 34px 28px 24px;
-  border-bottom: 1px solid rgba(207, 170, 109, 0.24);
+  padding: 28px 24px 21px;
+  border-bottom: 1px solid var(--kindred-border);
 }
 
 .kindred-toc-header::after {
   position: absolute;
-  right: 28px;
+  right: 24px;
   bottom: -1px;
-  left: 28px;
+  left: 24px;
   height: 1px;
   content: "";
-  background: linear-gradient(90deg, var(--kindred-gold), transparent 72%);
+  background: linear-gradient(90deg, var(--kindred-accent), transparent 72%);
 }
 
 .kindred-toc-kicker {
-  color: var(--kindred-gold);
+  color: var(--kindred-accent);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.28em;
@@ -1528,9 +1531,9 @@ body.kindred-toc-open {
 
 .kindred-toc-header h2 {
   margin: 7px 0 5px;
-  color: var(--kindred-ivory);
+  color: var(--kindred-text);
   font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 29px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1.25;
@@ -1548,19 +1551,19 @@ body.kindred-toc-open {
   width: 38px;
   height: 38px;
   padding: 0 0 3px;
-  color: var(--kindred-ivory);
+  color: var(--kindred-text);
   font: 300 28px/1 system-ui, sans-serif;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(207, 170, 109, 0.3);
+  background: transparent;
+  border: 1px solid var(--kindred-border);
   border-radius: 50%;
   transition: color 160ms ease, background 160ms ease, transform 160ms ease;
   place-items: center;
 }
 
 .kindred-toc-close:hover {
-  color: var(--kindred-gold);
-  background: rgba(207, 170, 109, 0.13);
+  color: var(--kindred-accent);
+  background: var(--kindred-accent-soft);
   transform: rotate(6deg);
 }
 
@@ -1570,7 +1573,7 @@ body.kindred-toc-open {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-color: rgba(207, 170, 109, 0.42) transparent;
+  scrollbar-color: color-mix(in srgb, var(--kindred-accent) 38%, transparent) transparent;
 }
 
 .kindred-toc-link {
@@ -1581,7 +1584,7 @@ body.kindred-toc-open {
   min-height: 53px;
   margin: 3px 0;
   padding: 8px 12px;
-  color: var(--kindred-ivory) !important;
+  color: var(--kindred-text) !important;
   text-decoration: none !important;
   border: 1px solid transparent;
   border-radius: 12px;
@@ -1589,20 +1592,21 @@ body.kindred-toc-open {
 }
 
 .kindred-toc-link:hover {
-  color: #fffaf1 !important;
-  background: rgba(255, 255, 255, 0.055);
-  border-color: rgba(207, 170, 109, 0.18);
+  color: var(--kindred-accent) !important;
+  background: color-mix(in srgb, var(--kindred-accent-soft) 64%, transparent);
+  border-color: color-mix(in srgb, var(--kindred-accent) 18%, var(--kindred-border));
   transform: translateX(3px);
 }
 
 .kindred-toc-link.is-current {
-  background: linear-gradient(90deg, rgba(207, 170, 109, 0.2), rgba(207, 170, 109, 0.07));
-  border-color: rgba(207, 170, 109, 0.58);
-  box-shadow: inset 3px 0 0 var(--kindred-gold);
+  color: var(--kindred-accent) !important;
+  background: var(--kindred-accent-soft);
+  border-color: color-mix(in srgb, var(--kindred-accent) 48%, var(--kindred-border));
+  box-shadow: inset 3px 0 0 var(--kindred-accent);
 }
 
 .kindred-toc-chapter {
-  color: var(--kindred-gold);
+  color: var(--kindred-accent);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -1617,45 +1621,45 @@ body.kindred-toc-open {
 }
 
 .kindred-toc-arrow {
-  color: rgba(207, 170, 109, 0.68);
+  color: color-mix(in srgb, var(--kindred-accent) 68%, var(--kindred-muted));
   font-size: 16px;
   transition: transform 160ms ease;
 }
 
 .kindred-toc-link:hover .kindred-toc-arrow,
 .kindred-toc-link.is-current .kindred-toc-arrow {
-  color: var(--kindred-gold);
+  color: var(--kindred-accent);
   transform: translateX(2px);
 }
 
 @media (max-width: 768px) {
   .kindred-toc-trigger {
     right: max(12px, env(safe-area-inset-right));
-    bottom: max(15px, env(safe-area-inset-bottom));
-    width: 180px;
-    min-height: 58px;
-    padding: 8px 9px;
-    border-radius: 16px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 126px;
+    min-height: 44px;
+    padding: 6px 8px;
+    border-radius: 13px;
   }
 
   .kindred-toc-trigger-icon {
-    flex-basis: 38px;
-    width: 38px;
-    height: 38px;
-    margin-right: 8px;
+    flex-basis: 29px;
+    width: 29px;
+    height: 29px;
+    margin-right: 7px;
   }
 
   .kindred-toc-trigger-icon svg {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
   }
 
   .kindred-toc-trigger-copy strong {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .kindred-toc-trigger-action {
-    font-size: 9px;
+    font-size: 18px;
   }
 
   .kindred-toc-panel {
@@ -1665,10 +1669,10 @@ body.kindred-toc-open {
     width: 100%;
     height: min(82vh, 720px);
     height: min(82dvh, 720px);
-    border: 1px solid rgba(207, 170, 109, 0.4);
+    border: 1px solid var(--kindred-border);
     border-bottom: 0;
     border-radius: 24px 24px 0 0;
-    box-shadow: 0 -24px 55px rgba(2, 8, 13, 0.42);
+    box-shadow: 0 -24px 55px rgba(29, 32, 40, 0.22);
     transform: translateY(104%);
   }
 
@@ -1687,7 +1691,7 @@ body.kindred-toc-open {
     width: 42px;
     height: 4px;
     content: "";
-    background: rgba(207, 170, 109, 0.45);
+    background: color-mix(in srgb, var(--kindred-accent) 38%, transparent);
     border-radius: 99px;
     transform: translateX(-50%);
   }

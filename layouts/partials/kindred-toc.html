@@ -32,16 +32,16 @@
       </span>
       <span class="kindred-toc-trigger-copy">
         <span>KINDRED</span>
-        <strong>小说目录</strong>
+        <strong>目录</strong>
       </span>
-      <span class="kindred-toc-trigger-action" aria-hidden="true">展开</span>
+      <span class="kindred-toc-trigger-action" aria-hidden="true">›</span>
     </button>
 
     <button
       class="kindred-toc-backdrop"
       type="button"
       data-kindred-toc-close
-      aria-label="关闭 Kindred 小说目录"
+      aria-label="关闭 Kindred 目录"
       tabindex="-1"
     ></button>
 
@@ -56,13 +56,13 @@
       <header class="kindred-toc-header">
         <div>
           <span class="kindred-toc-kicker">KINDRED</span>
-          <h2 id="kindred-toc-title">小说目录</h2>
+          <h2 id="kindred-toc-title">目录</h2>
           <p>序章 · 十二章 · 尾声</p>
         </div>
-        <button class="kindred-toc-close" type="button" data-kindred-toc-close aria-label="关闭小说目录">×</button>
+        <button class="kindred-toc-close" type="button" data-kindred-toc-close aria-label="关闭目录">×</button>
       </header>
 
-      <nav class="kindred-toc-list" aria-label="Kindred 小说章节">
+      <nav class="kindred-toc-list" aria-label="Kindred 章节目录">
         {{- range $chapters -}}
           {{- $chapter := . -}}
           {{- with $.Site.GetPage $chapter.path -}}
