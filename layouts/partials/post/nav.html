@@ -1,23 +1,46 @@
-{{- /* With Hugo's descending section order, Next is newer and Prev is older. */ -}}
-{{- $newer := .NextInSection -}}
-{{- $older := .PrevInSection -}}
-{{- if or $newer $older -}}
-  <nav id="article-nav" class="article-neighbors" aria-label="相邻文章">
-    {{- with $newer -}}
+{{- $isKindred := in (.Params.tags | default (slice)) "kindred" -}}
+{{- $previous := .PrevInSection -}}
+{{- $next := .NextInSection -}}
+{{- $previousLabel := "上一篇" -}}
+{{- $nextLabel := "下一篇" -}}
+{{- if $isKindred -}}
+  {{- $previous = false -}}
+  {{- $next = false -}}
+  {{- $previousLabel = "上一章" -}}
+  {{- $nextLabel = "下一章" -}}
+  {{- $chapters := partial "kindred-chapters.html" . -}}
+  {{- range $index, $chapter := $chapters -}}
+    {{- with $.Site.GetPage $chapter.path -}}
+      {{- if eq .RelPermalink $.RelPermalink -}}
+        {{- if gt $index 0 -}}
+          {{- $previous = $.Site.GetPage (index $chapters (sub $index 1)).path -}}
+        {{- end -}}
+        {{- if lt $index (sub (len $chapters) 1) -}}
+          {{- $next = $.Site.GetPage (index $chapters (add $index 1)).path -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if or $previous $next -}}
+  <nav id="article-nav" class="article-neighbors" aria-label="{{ if $isKindred }}相邻章节{{ else }}相邻文章{{ end }}">
+    {{- with $previous -}}
       <a class="article-neighbor article-neighbor-newer" rel="prev" href="{{ .RelPermalink }}">
-        <span>← Later</span>
-        <strong>{{ .Title }}</strong>
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <span>← {{ $previousLabel }}</span>
+        <strong>{{ partial "post/display-title.html" . }}</strong>
+        {{- if not $isKindred -}}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{- end -}}
       </a>
     {{- else -}}
-      <span class="article-neighbor-placeholder"></span>
+      <span class="article-neighbor-placeholder" aria-hidden="true"></span>
     {{- end -}}
-    {{- with $older -}}
+    {{- with $next -}}
       <a class="article-neighbor article-neighbor-older" rel="next" href="{{ .RelPermalink }}">
-        <span>Earlier →</span>
-        <strong>{{ .Title }}</strong>
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <span>{{ $nextLabel }} →</span>
+        <strong>{{ partial "post/display-title.html" . }}</strong>
+        {{- if not $isKindred -}}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{- end -}}
       </a>
+    {{- else -}}
+      <span class="article-neighbor-placeholder" aria-hidden="true"></span>
     {{- end -}}
   </nav>
 {{- end -}}

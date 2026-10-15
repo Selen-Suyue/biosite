@@ -1,10 +1,13 @@
 {{- define "main" -}}
   {{- $paginator := .Paginate (.Pages.ByDate.Reverse) -}}
+  {{- partial "content-switcher.html" . -}}
   <header class="taxonomy-header taxonomy-list-header">
-    <p class="taxonomy-kicker">Category</p>
-    <h1>{{ .Title }}</h1>
+    <h1>{{ partial "category-label.html" .Title }}</h1>
     <p>共 {{ len .Pages }} 篇文章</p>
   </header>
+  {{- if eq .Data.Term "novel" -}}
+    {{- partial "series-entry.html" . -}}
+  {{- end -}}
   <div class="blog-list" aria-label="{{ .Title }}分类下的文章">
     {{- range $paginator.Pages -}}
       {{- partial "post.html" . -}}

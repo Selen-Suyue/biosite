@@ -1,0 +1,19 @@
+{{- define "main" -}}
+  {{- $paginator := .Paginate (.Pages.ByDate.Reverse) -}}
+  <nav class="page-context" aria-label="标签位置">
+    <a class="post-back-link" href="{{ "tags/" | relURL }}">← 全部标签</a>
+  </nav>
+  <header class="taxonomy-header taxonomy-list-header">
+    <h1>#{{ .Title }}</h1>
+    <p>共 {{ len .Pages }} 篇文章</p>
+  </header>
+  {{- if eq .Data.Term "kindred" -}}
+    {{- partial "series-entry.html" . -}}
+  {{- end -}}
+  <div class="blog-list" aria-label="{{ .Title }}标签下的文章">
+    {{- range $paginator.Pages -}}
+      {{- partial "post.html" . -}}
+    {{- end -}}
+  </div>
+  {{- partial "pagination.html" . -}}
+{{- end -}}

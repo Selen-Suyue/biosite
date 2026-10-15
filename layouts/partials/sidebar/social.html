@@ -1,0 +1,15 @@
+<div class="sidebar-social" aria-label="社交主页">
+  {{- if reflect.IsSlice .Site.Params.social -}}
+    {{- range .Site.Params.social -}}
+      <div class="icon-{{ .name }} sidebar-social-icon">
+        <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}" rel="noopener noreferrer"></a>
+      </div>
+    {{- end -}}
+  {{- else -}}
+    {{- range $name, $url := .Site.Params.social -}}
+      <div class="icon-{{ $name }} sidebar-social-icon">
+        <a href="{{ $url }}" target="_blank" aria-label="{{ $name }}" rel="noopener noreferrer"></a>
+      </div>
+    {{- end -}}
+  {{- end -}}
+</div>

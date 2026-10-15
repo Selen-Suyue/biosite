@@ -2,13 +2,17 @@
 [
 {{- range $index, $page := $posts.ByDate.Reverse -}}
   {{- if $index }},{{ end }}
+  {{- $categories := slice -}}
+  {{- range $page.Params.categories -}}
+    {{- $categories = $categories | append (partial "category-label.html" .) -}}
+  {{- end -}}
   {{- dict
-    "title" $page.Title
+    "title" (partial "post/display-title.html" $page)
     "url" $page.RelPermalink
     "date" ($page.Date.Format "2006-01-02")
-    "summary" ($page.Summary | plainify)
+    "summary" (partial "post/summary.html" $page)
     "content" ($page.Plain | htmlUnescape)
-    "categories" ($page.Params.categories | default (slice))
+    "categories" $categories
     "tags" ($page.Params.tags | default (slice))
     | jsonify -}}
 {{- end }}

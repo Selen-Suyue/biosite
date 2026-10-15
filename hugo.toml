@@ -1,6 +1,8 @@
 baseURL = 'https://selen-suyue.github.io/biosite/'
 locale = 'zh-CN'
 defaultContentLanguage = 'zh-cn'
+hasCJKLanguage = true
+summaryLength = 100
 title = "Selen's Blogs"
 
 theme = 'reimu'
@@ -18,6 +20,21 @@ notAlternative = true
 
 [pagination]
 pagerSize = 6
+
+# Reuse original illustrations as build-time image resources. Hugo publishes
+# resized WebP variants while the original content URLs remain available.
+[[module.mounts]]
+source = 'assets'
+target = 'assets'
+[[module.mounts]]
+source = 'content/imgs'
+target = 'assets/imgs'
+[[module.mounts]]
+source = 'static/images'
+target = 'assets/images'
+[[module.mounts]]
+source = 'static/avatar'
+target = 'assets/avatar'
 
 # Keep article navigation consistent with the newest-first home page.
 [page]

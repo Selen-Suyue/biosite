@@ -1,0 +1,2 @@
+{{- $labels := dict "journal" "随笔" "novel" "小说" -}}
+{{- return (index $labels (lower (printf "%v" .)) | default .) -}}

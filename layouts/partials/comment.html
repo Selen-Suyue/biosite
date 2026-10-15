@@ -11,7 +11,7 @@
             data-reactions-enabled="{{ .Site.Params.giscus.reactionsEnabled }}"
             data-emit-metadata="{{ .Site.Params.giscus.emitMetadata }}"
             data-input-position="{{ .Site.Params.giscus.inputPosition }}"
-            data-theme="{{ .Site.Params.giscus.theme }}"
+            data-theme="{{ .Site.Params.giscus.theme.light | default "light" }}"
             data-lang="{{ .Site.Params.giscus.lang }}"
             {{- with .Site.Params.giscus.loading }}
             data-loading="{{ . }}"
