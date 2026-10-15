@@ -1,0 +1,5 @@
+{{- $summary := .Summary -}}
+{{- if in (.Params.tags | default (slice)) "kindred" -}}
+  {{- $summary = replaceRE `(?s)^\s*<h1[^>]*>.*?</h1>` "" $summary -}}
+{{- end -}}
+{{- return ($summary | plainify | htmlUnescape | truncate 100) -}}

@@ -38,7 +38,7 @@ banner: "images/covers/guhechu.jpg"
 appearance:
   banner_position: "center 12%" # CSS object-position，例如 center、center top、50% 30%
   banner_overlay: 0.22          # 0（无遮罩）到 1（全黑），用于保证标题清晰
-  banner_height: "320px"       # 支持 px、vh 等 CSS 单位
+  banner_height: "240px"       # 支持 px、vh 等 CSS 单位
 # You can also write it in the form of the following url
 # banner: "https://example.com"
 
@@ -81,8 +81,8 @@ footer:
     mask: true # whether to use the images as a mask
 
 # Sidebar
-# Enable the common sidebar on desktop too; mobile already shows it as a slide-out menu.
-sidebar: left
+# The blog uses one content column; mobile navigation is a separate drawer.
+sidebar: false
 
 social:
   # email: s3702681@gmail.com
@@ -255,8 +255,11 @@ giscus:
   reactionsEnabled: 1
   emitMetadata: 0
   inputPosition: bottom
-  # commentTheme: preferred_color_scheme invalid
-  lang: en
+  theme:
+    light: light
+    dark: dark
+  lang: zh-CN
+  loading: lazy
 
 ########################################
 # Search

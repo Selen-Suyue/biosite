@@ -1,13 +1,19 @@
 {{- define "main" -}}
+  {{- $title := partial "post/display-title.html" . -}}
+  {{- $isKindred := in (.Params.tags | default (slice)) "kindred" -}}
+  <nav class="page-context" aria-label="文章位置">
+    <a class="post-back-link" data-return-to-list href="{{ "archives/" | relURL }}">← 返回文章列表</a>
+    {{- if $isKindred -}}
+      {{- with .Site.GetPage "/post/kindred_prologue" -}}
+        <a href="{{ .RelPermalink }}">Kindred · 从序章开始</a>
+      {{- end -}}
+    {{- end -}}
+  </nav>
   <article class="post-page h-entry" itemscope itemtype="https://schema.org/BlogPosting">
     {{- with .Params.cover -}}
       {{- if not (strings.HasPrefix (printf "%v" .) "rgb") -}}
-        <figure
-          class="post-hero"
-          style="{{ printf "--post-hero-image: url(%q);" (. | relURL) | safeCSS }}"
-        >
-          <div class="post-hero-blur" aria-hidden="true"></div>
-          <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
+        <figure class="post-hero">
+          {{- partial "responsive-image.html" (dict "src" . "alt" $title "kind" "hero") -}}
         </figure>
       {{- end -}}
     {{- end -}}
@@ -18,12 +24,12 @@
         {{- if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") -}}
           <span>更新于 {{ .Lastmod.Format "2006-01-02" }}</span>
         {{- end -}}
-        <span>{{ .ReadingTime }} min read</span>
+        <span>约 {{ .ReadingTime }} 分钟</span>
       </div>
-      <h1 itemprop="headline">{{ .Title }}</h1>
+      <h1 itemprop="headline">{{ $title }}</h1>
       <div class="post-page-taxonomy">
         {{- range .GetTerms "categories" -}}
-          <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          <a href="{{ .RelPermalink }}">{{ partial "category-label.html" .LinkTitle }}</a>
         {{- end -}}
         {{- range .GetTerms "tags" -}}
           <a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
@@ -32,7 +38,11 @@
     </header>
 
     <div class="post-page-content article-entry" itemprop="articleBody">
-      {{ .Content | safeHTML }}
+      {{- $content := .Content -}}
+      {{- if $isKindred -}}
+        {{- $content = $content | replaceRE `(?s)^\s*<h1[^>]*>.*?</h1>` "" -}}
+      {{- end -}}
+      {{ $content | replaceRE `<h1([^>]*)>` `<h2${1}>` | replaceRE `</h1>` `</h2>` | safeHTML }}
     </div>
 
     {{- partial "post/nav.html" . -}}

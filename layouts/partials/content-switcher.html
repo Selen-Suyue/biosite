@@ -1,0 +1,8 @@
+<nav class="content-switcher" aria-label="浏览文章">
+  <a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} aria-current="page"{{ end }}>全部</a>
+  {{- range slice "journal" "novel" -}}
+    {{- with $.Site.GetPage (printf "/categories/%s" .) -}}
+      <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ partial "category-label.html" .LinkTitle }}</a>
+    {{- end -}}
+  {{- end -}}
+</nav>

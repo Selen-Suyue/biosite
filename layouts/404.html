@@ -1,0 +1,12 @@
+{{- define "main" -}}
+  <section class="not-found-page">
+    <header class="taxonomy-header">
+      <h1>404 · 页面未找到</h1>
+      <p>页面可能已移动，或链接有误。</p>
+    </header>
+    <nav class="page-context" aria-label="继续浏览">
+      <a class="post-back-link" href="{{ .Site.Home.RelPermalink }}">← 返回首页</a>
+      <a class="post-back-link" href="{{ "archives/" | relURL }}">浏览归档 →</a>
+    </nav>
+  </section>
+{{- end -}}

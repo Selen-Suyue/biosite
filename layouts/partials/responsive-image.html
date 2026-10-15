@@ -1,0 +1,32 @@
+{{- /* Resize original local artwork at build time; remote images keep a safe fallback. */ -}}
+{{- $src := .src | strings.TrimPrefix "/" -}}
+{{- $kind := .kind | default "thumbnail" -}}
+{{- $widths := slice 240 480 -}}
+{{- $sizes := "(max-width: 359px) 1px, (max-width: 767px) 96px, (max-width: 1023px) 128px, 152px" -}}
+{{- $loading := "lazy" -}}
+{{- if eq $kind "hero" -}}
+  {{- $widths = slice 480 960 1440 -}}
+  {{- $sizes = "(max-width: 767px) calc(100vw - 40px), (max-width: 943px) calc(100vw - 64px), 880px" -}}
+  {{- $loading = "eager" -}}
+{{- else if eq $kind "banner" -}}
+  {{- $widths = slice 640 1280 1920 -}}
+  {{- $sizes = "100vw" -}}
+  {{- $loading = "eager" -}}
+{{- else if eq $kind "avatar" -}}
+  {{- $widths = slice 96 192 -}}
+  {{- $sizes = "48px" -}}
+{{- end -}}
+{{- $image := resources.Get $src -}}
+{{- if and $image (eq $image.ResourceType "image") -}}
+  {{- $variants := slice -}}
+  {{- $fallback := "" -}}
+  {{- range $widths -}}
+    {{- $width := math.Min . $image.Width | int -}}
+    {{- $variant := $image.Resize (printf "%dx webp q82" $width) -}}
+    {{- $variants = $variants | append (printf "%s %dw" $variant.RelPermalink $variant.Width) -}}
+    {{- if not $fallback }}{{ $fallback = $variant.RelPermalink }}{{ end -}}
+  {{- end -}}
+  <img src="{{ $fallback }}" srcset="{{ delimit ($variants | uniq) ", " }}" sizes="{{ $sizes }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ .alt | default "" }}" loading="{{ $loading }}" decoding="async"{{ if eq $kind "banner" }} fetchpriority="high"{{ end }} />
+{{- else -}}
+  <img src="{{ .src | relURL }}" alt="{{ .alt | default "" }}" loading="{{ $loading }}" decoding="async" />
+{{- end -}}

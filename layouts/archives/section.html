@@ -1,0 +1,24 @@
+{{- define "main" -}}
+  {{- $posts := where .Site.RegularPages "Section" "in" .Site.Params.mainSections -}}
+  <section class="archive-index">
+    <header class="taxonomy-header">
+      <h1>文章归档</h1>
+      <p>共 {{ len $posts }} 篇文章，按时间排列。</p>
+    </header>
+    {{- range $posts.GroupByDate "2006" "desc" -}}
+      <section class="archive-year-group" aria-labelledby="archive-year-{{ .Key }}">
+        <h2 id="archive-year-{{ .Key }}">{{ .Key }}</h2>
+        <ul class="archive-list">
+          {{- range .Pages.ByDate.Reverse -}}
+            <li>
+              <a href="{{ .RelPermalink }}">
+                <time class="archive-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01-02" }}</time>
+                <span class="archive-title">{{ partial "post/display-title.html" . }}</span>
+              </a>
+            </li>
+          {{- end -}}
+        </ul>
+      </section>
+    {{- end -}}
+  </section>
+{{- end -}}

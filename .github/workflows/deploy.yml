@@ -40,13 +40,20 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "latest"
+          hugo-version: "0.168.0"
           extended: true
 
       - name: Build
         run: hugo --minify --gc
 
+      - name: Check built site
+        run: python3 scripts/check-built-site.py
+
+      - name: Check interactions
+        run: node scripts/check-interactions.cjs
+
       - name: Deploy 🚀
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages

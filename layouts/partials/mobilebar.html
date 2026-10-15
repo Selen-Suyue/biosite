@@ -1,37 +1,17 @@
 <nav id="mobile-nav" aria-label="移动导航" aria-hidden="true">
   <header class="mobile-nav-toolbar">
-    <div>
-      <span class="mobile-nav-kicker">Navigation</span>
-      <strong class="mobile-nav-title">About</strong>
-    </div>
-    <button class="mobile-nav-close" type="button" aria-label="关闭移动导航">×</button>
+    <strong class="mobile-nav-title">导航</strong>
+    <button class="mobile-nav-close" type="button" aria-label="关闭导航">×</button>
   </header>
   <div class="sidebar-wrap">
-    {{- if in .Site.Params.mainSections .Type -}}
-      {{- if eq .Params.toc false -}}
-        {{- partial "sidebar/commonBar.html" (dict "ctx" . "mobile" true) -}}
-      {{- else if and (ne .Params.toc true) (eq .Site.Params.toc false) -}}
-        {{- partial "sidebar/commonBar.html" (dict "ctx" . "mobile" true) -}}
-      {{- else -}}
-        <div class="sidebar-toc-sidebar">
-          {{- partial "sidebar/tocBar.html" . -}}
-        </div>
-        <div class="sidebar-common-sidebar hidden">
-          {{- partial "sidebar/commonBar.html" (dict "ctx" . "mobile" true) -}}
-        </div>
-      {{- end -}}
-    {{- else -}}
-      {{- partial "sidebar/commonBar.html" (dict "ctx" . "mobile" true) -}}
-    {{- end -}}
+    {{- partial "sidebar/menu.html" . -}}
+    <div class="sidebar-author">
+      {{- partial "responsive-image.html" (dict "src" (printf "avatar/%s" .Site.Params.avatar) "alt" .Site.Params.author "kind" "avatar") -}}
+      <div class="sidebar-author-name">{{ .Site.Params.author }}</div>
+      <div class="sidebar-description">{{ .Site.Params.description }}</div>
+    </div>
+    {{- $posts := where .Site.RegularPages "Section" "in" .Site.Params.mainSections -}}
+    <p class="sidebar-stats">{{ len $posts }} 篇文章 · {{ len .Site.Taxonomies.categories }} 个分类</p>
+    {{- partial "sidebar/social.html" . -}}
   </div>
-  {{- if in .Site.Params.mainSections .Type -}}
-    {{- if eq .Params.toc false -}}
-    {{- else if and (ne .Params.toc true) (eq .Site.Params.toc false) -}}
-    {{- else -}}
-      <div class="sidebar-btn-wrapper">
-        <div class="sidebar-toc-btn current"></div>
-        <div class="sidebar-common-btn"></div>
-      </div>
-    {{- end -}}
-  {{- end -}}
 </nav>

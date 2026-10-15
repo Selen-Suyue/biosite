@@ -35,14 +35,7 @@
   {{- $pageCover := .Params.cover -}}
   {{- $hasPageCover := and $pageCover (not (strings.HasPrefix (printf "%v" $pageCover) "rgb")) -}}
   {{- $isPostPage := and .IsPage (in .Site.Params.mainSections .Type) -}}
-  <body
-    {{- if or $hasPageCover $isPostPage }}
-      class="{{ if $hasPageCover }}has-page-cover{{ end }}{{ if $isPostPage }} is-post-page{{ end }}"
-    {{- end }}
-    {{- if $hasPageCover }}
-      style="{{ printf "--page-cover-image: url(%q);" ($pageCover | relURL) | safeCSS }}"
-    {{- end }}
-  >
+  <body class="{{ if .IsHome }}is-home{{ else if $isPostPage }}is-post-page{{ else }}is-list-page{{ end }}{{ if in (.Params.tags | default (slice)) "kindred" }} is-kindred-page{{ end }}">
     {{- with .Site.Params.injector.body_begin }}{{ . | safeHTML }}{{ end -}}
     {{- partialCached "loader.html" . -}}
     <div id="container">
@@ -77,7 +70,7 @@
         data-index="{{ "search-index.json" | relURL }}"
         data-max-results="{{ .Site.Params.local_search.max_results | default 12 }}"
       >
-        <button class="local-search-backdrop" type="button" data-search-close aria-label="关闭搜索"></button>
+        <button class="local-search-backdrop" type="button" data-search-close aria-label="关闭搜索" tabindex="-1"></button>
         <section class="local-search-panel">
           <header class="local-search-header">
             <div>
@@ -91,6 +84,7 @@
             <input
               id="local-search-input"
               type="search"
+              aria-label="搜索文章标题或正文"
               autocomplete="off"
               placeholder="{{ .Site.Params.local_search.placeholder | default "搜索文章…" }}"
             />

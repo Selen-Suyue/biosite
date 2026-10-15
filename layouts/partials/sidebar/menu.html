@@ -1,0 +1,9 @@
+<div class="sidebar-menu" aria-label="网站导航">
+  {{- range .Site.Params.menu -}}
+    {{- $item := partial "navigation-item.html" (dict "item" . "ctx" $) -}}
+    <div class="sidebar-menu-link-wrap{{ if $item.current }} link-active{{ end }}">
+      <a class="sidebar-menu-link-dummy" href="{{ $item.url }}" aria-label="{{ $item.label }}"{{ if $item.current }} aria-current="page"{{ end }}></a>
+      <div class="sidebar-menu-link">{{ $item.label }}{{ if $item.external }} <span aria-hidden="true">↗</span>{{ end }}</div>
+    </div>
+  {{- end -}}
+</div>

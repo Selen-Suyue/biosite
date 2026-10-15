@@ -1,0 +1,32 @@
+<div id="header-nav">
+  <nav id="main-nav" aria-label="主导航">
+    {{- range .Site.Params.menu -}}
+      {{- $item := partial "navigation-item.html" (dict "item" . "ctx" $) -}}
+      <a class="main-nav-link-wrap{{ if $item.current }} is-current{{ end }}" href="{{ $item.url }}"{{ if $item.current }} aria-current="page"{{ end }}>
+        <span class="main-nav-link">{{ $item.label }}{{ if $item.external }} <span aria-hidden="true">↗</span>{{ end }}</span>
+      </a>
+    {{- end -}}
+    <button id="main-nav-toggle" class="nav-icon" type="button" aria-label="打开导航" aria-controls="mobile-nav" aria-expanded="false"></button>
+  </nav>
+  <nav id="sub-nav" aria-label="快捷操作">
+    {{- with .OutputFormats.Get "rss" -}}
+      <a id="nav-rss-link" class="nav-icon" href="{{ .Permalink | relURL }}" title="{{ i18n "rss_feed" }}" aria-label="{{ i18n "rss_feed" }}" target="_blank" rel="noopener noreferrer"></a>
+    {{- end -}}
+    {{- if .Site.Params.algolia_search.enable -}}
+      <button id="nav-search-btn" class="nav-icon popup-trigger" type="button" title="搜索" aria-label="搜索"></button>
+    {{- end -}}
+  </nav>
+</div>
+<header id="header" aria-label="网站页头">
+  {{- if .IsHome -}}
+    {{- partial "responsive-image.html" (dict "src" .Site.Params.banner "alt" "" "kind" "banner") -}}
+    <div id="header-outer">
+      <div id="header-title">
+        <span id="logo"><h1>{{ .Site.Title }}</h1></span>
+        {{- with .Site.Params.subtitle -}}
+          <p id="subtitle-wrap"><span id="subtitle">{{ . }}</span></p>
+        {{- end -}}
+      </div>
+    </div>
+  {{- end -}}
+</header>

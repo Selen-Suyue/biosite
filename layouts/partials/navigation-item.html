@@ -1,0 +1,20 @@
+{{- $item := .item -}}
+{{- $ctx := .ctx -}}
+{{- $external := strings.HasPrefix $item.url "http" -}}
+{{- $url := $item.url | relLangURL -}}
+{{- if not $external -}}
+  {{- $url = printf "%s/" (strings.TrimRight "/" $url) -}}
+{{- end -}}
+{{- $current := false -}}
+{{- if not $external -}}
+  {{- if eq $item.url "" -}}
+    {{- $current = $ctx.IsHome -}}
+  {{- else -}}
+    {{- $current = strings.HasPrefix $ctx.RelPermalink $url -}}
+  {{- end -}}
+{{- end -}}
+{{- $label := i18n $item.name | default $item.name -}}
+{{- if eq $item.name "about" -}}
+  {{- $label = "个人主页" -}}
+{{- end -}}
+{{- return (dict "url" $url "label" $label "current" $current "external" $external) -}}
