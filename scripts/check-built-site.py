@@ -9,6 +9,7 @@ import argparse
 from collections import Counter
 from datetime import datetime, timezone
 from html.parser import HTMLParser
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -175,6 +176,29 @@ def main():
     for path in output.rglob("*.html"):
         page = Page(path)
         label = path.relative_to(output).as_posix()
+        # Every real page must request the exact CSS/JS content it was built with.
+        # This catches mixed-version deployments for visitors with warm caches.
+        if page.h1_count:
+            references = [item.get("href", "") for item in page.stylesheets]
+            references += [item.get("src", "") for item in page.scripts]
+            for directory, name in (("site-css", "custom.css"),
+                                    ("site-js", "local-search.js"),
+                                    ("site-js", "navigation.js"),
+                                    ("site-js", "kindred-toc.js"),
+                                    ("site-js", "theme-toggle-override.js"),
+                                    ("js", "main.js"),
+                                    ("js", "pjax_main.js")):
+                stem, extension = name.rsplit(".", 1)
+                pattern = r"/%s/%s\.([0-9a-f]{64})\.%s$" % (directory, re.escape(stem), extension)
+                matches = [(ref, re.search(pattern, urlsplit(ref).path)) for ref in references]
+                matches = [(ref, match) for ref, match in matches if match]
+                check(len(matches) == 1, "Missing fingerprinted %s in %s" % (name, label))
+                for ref, match in matches:
+                    target = local_path(ref, path)
+                    check(target is not None and target.is_file(), "Missing versioned asset in " + label)
+                    if target is not None and target.is_file():
+                        check(hashlib.sha256(target.read_bytes()).hexdigest() == match[1],
+                              "Asset fingerprint does not match its content in " + label)
         for image in page.images + page.sources:
             for key in ("src", "data-src"):
                 if image.get(key):
@@ -217,10 +241,9 @@ def main():
         css = {local_path(link["href"], not_found_path) for link in not_found.stylesheets
                if link.get("href")}
         scripts = {local_path(script["src"], not_found_path) for script in not_found.scripts}
-        for asset, references in ((output / "css/custom.css", css),
-                                  (output / "js/navigation.js", scripts)):
-            check(asset in references and asset.is_file(),
-                  "404 page is missing the local asset " + asset.relative_to(output).as_posix())
+        for prefix, references in (("custom.", css), ("navigation.", scripts)):
+            check(any(asset and asset.is_file() and asset.name.startswith(prefix) for asset in references),
+                  "404 page is missing the versioned local asset " + prefix)
 
     archive_path = output / "archives/index.html"
     check(archive_path.is_file(), "Missing archive index")

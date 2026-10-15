@@ -35,6 +35,12 @@ target = 'assets/images'
 [[module.mounts]]
 source = 'static/avatar'
 target = 'assets/avatar'
+[[module.mounts]]
+source = 'static/css'
+target = 'assets/site-css'
+[[module.mounts]]
+source = 'static/js'
+target = 'assets/site-js'
 
 # Keep article navigation consistent with the newest-first home page.
 [page]

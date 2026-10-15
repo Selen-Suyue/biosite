@@ -22,7 +22,7 @@
     </script>
     {{- with .Site.Params.injector.head_begin }}{{ . | safeHTML }}{{ end -}}
     {{- partial "head.html" . -}}
-    <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}" />
+    <link rel="stylesheet" href="{{ partial "site-asset.html" "site-css/custom.css" }}" />
     <style>
       :root {
         --site-banner-position: {{ .Site.Params.appearance.banner_position | default "center" }};
@@ -93,10 +93,10 @@
           <div id="local-search-results" class="local-search-results"></div>
         </section>
       </div>
-      <script src="{{ "js/local-search.js" | relURL }}" defer></script>
+      <script src="{{ partial "site-asset.html" "site-js/local-search.js" }}" defer></script>
     {{- end -}}
-    <script src="{{ "js/navigation.js" | relURL }}" defer></script>
-    <script src="{{ "js/kindred-toc.js" | relURL }}" defer></script>
+    <script src="{{ partial "site-asset.html" "site-js/navigation.js" }}" defer></script>
+    <script src="{{ partial "site-asset.html" "site-js/kindred-toc.js" }}" defer></script>
 
     {{- if and .Site.Params.player.aplayer.enable (not .Site.Params.player.meting.enable) .Site.Params.player.aplayer.options.fixed -}}
       <div id="aplayer" theme="var(--color-link)"></div>
@@ -120,7 +120,7 @@
       </meting-js>
     {{- end -}}
     {{- partial "afterFooter.html" . -}}
-    <script src="{{ "js/theme-toggle-override.js" | relURL }}" defer></script>
+    <script src="{{ partial "site-asset.html" "site-js/theme-toggle-override.js" }}" defer></script>
     {{- with .Site.Params.injector.body_end }}{{ . | safeHTML }}{{ end -}}
   </body>
 </html>
