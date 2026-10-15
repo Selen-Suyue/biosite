@@ -1,0 +1,6 @@
+{{- /* A content fingerprint prevents old browser/CDN assets mixing with new HTML. */ -}}
+{{- $asset := resources.Get . -}}
+{{- if not $asset -}}
+  {{- errorf "Missing site asset: %s" . -}}
+{{- end -}}
+{{- return ($asset | fingerprint "sha256").RelPermalink -}}
