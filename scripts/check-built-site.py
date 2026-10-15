@@ -185,7 +185,9 @@ def main():
                                     ("site-js", "local-search.js"),
                                     ("site-js", "navigation.js"),
                                     ("site-js", "kindred-toc.js"),
-                                    ("site-js", "theme-toggle-override.js")):
+                                    ("site-js", "theme-toggle-override.js"),
+                                    ("js", "main.js"),
+                                    ("js", "pjax_main.js")):
                 stem, extension = name.rsplit(".", 1)
                 pattern = r"/%s/%s\.([0-9a-f]{64})\.%s$" % (directory, re.escape(stem), extension)
                 matches = [(ref, re.search(pattern, urlsplit(ref).path)) for ref in references]
